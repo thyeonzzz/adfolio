@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>thyeon · 品牌策划作品集</title>
+<meta name="description" content="thyeon 的品牌策划作品集：一套应用于品牌咨询和营销策划领域的可执行知识系统，以及四个真实品牌案例与视觉实验。">
+<meta property="og:title" content="thyeon · 品牌策划作品集">
+<meta property="og:description" content="自研知识系统 · 四个真实品牌案例 · 视觉实验与帖文选摘">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Crect x='3' y='5' width='10' height='2' fill='%23fff'/%3E%3Crect x='3' y='9' width='10' height='2' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --platinum: #C0C0C0;
+    --platinum-light: #DDDDDD;
+    --platinum-dark: #A0A0A0;
+    --ink: #000000;
+    --paper: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #C5C5C5;
+    background-image:
+      linear-gradient(45deg, #BDBDBD 25%, transparent 25%, transparent 75%, #BDBDBD 75%),
+      linear-gradient(45deg, #BDBDBD 25%, transparent 25%, transparent 75%, #BDBDBD 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 2px 2px;
+    font-family: "SimSun", "NSimSun", "宋体", "MS Sans Serif", Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    cursor: default;
+    -webkit-font-smoothing: none;
+    overflow-x: hidden;
+  }
+
+  body.dragging { user-select: none; -webkit-user-select: none; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── 菜单栏 ── */
+  .menu-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99990;
+    height: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+    font-size: 11px;
+    padding: 0 6px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .menu-left, .menu-right { display: flex; align-items: center; }
+  .menu-item { position: relative; padding: 3px 9px; }
+  .menu-item:hover { background: var(--paper); color: var(--ink); }
+  .menu-open, .menu-open:hover { background: var(--paper); color: var(--ink); }
+  .app-name { font-weight: bold; }
+  .apple { padding: 0 7px 0 3px; display: flex; align-items: center; }
+  .apple:hover { background: var(--paper); }
+
+  .menu-drop {
+    position: absolute; top: 100%; left: 0;
+    min-width: 200px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--shadow);
+    display: none;
+    padding: 3px;
+    z-index: 100000;
+    font-family: "SimSun", "NSimSun", "宋体", "MS Sans Serif", Tahoma, sans-serif;
+  }
+  .menu-open .menu-drop { display: block; }
+  .mi {
+    display: block;
+    position: relative;
+    padding: 4px 14px 4px 22px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .mi:hover { background: var(--ink); color: var(--paper); }
+  .mi.disabled { color: #999; }
+  .mi.disabled:hover { background: transparent; color: #999; }
+  .mi .short { float: right; margin-left: 28px; }
+  .mi.check::before { content: "✓"; position: absolute; left: 8px; }
+  .menu-sep { border-top: 1px solid #999; margin: 3px 4px; }
+
+  /* ── 桌面 ── */
+  .desktop {
+    position: relative;
+    min-height: 100dvh;
+    padding: 34px 20px 120px;
+  }
+
+  .icons {
+    position: absolute; top: 48px; right: 26px;
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .icon { width: 78px; text-align: center; cursor: default; }
+  .icon-gfx { width: 36px; margin: 0 auto 7px; }
+  .icon-label {
+    font-size: 11px;
+    color: var(--ink);
+    text-shadow: 1px 1px 0 rgba(255,255,255,.7);
+    line-height: 1.3;
+    padding: 1px 2px;
+  }
+  .icon:hover .icon-label { background: var(--ink); color: var(--paper); text-shadow: none; }
+
+  .folder { position: relative; height: 26px; margin-top: 9px; }
+  .folder .tab {
+    position: absolute; top: -7px; left: 0;
+    width: 13px; height: 7px;
+    border: 1px solid #6B5200;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+    background: #FFD24A;
+  }
+  .folder .body {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 19px;
+    border: 1px solid #6B5200;
+    border-radius: 0 3px 3px 3px;
+    background: linear-gradient(#FFE066, #F5B800);
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,.75);
+  }
+  .folder.blue .tab, .folder.blue .body { border-color: #274E79; }
+  .folder.blue .body { background: linear-gradient(#9DC4FF, #4E82C8); }
+
+  .disk { height: 31px; margin-top: 4px; position: relative; }
+  .disk .case {
+    position: absolute; inset: 0;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background: linear-gradient(#ECECEC, #A8A8A8);
+    box-shadow: inset 1px 1px 0 #FFF;
+  }
+  .disk .led {
+    position: absolute; left: 4px; top: 5px;
+    width: 4px; height: 4px;
+    background: #3ECB48;
+    border: 1px solid #1F5A26;
+  }
+  .disk .vent { position: absolute; left: 12px; right: 4px; top: 6px; height: 7px; }
+  .disk .vent span { display: block; height: 1px; background: #777; margin-bottom: 2px; }
+
+  .info {
+    width: 30px; height: 30px; margin: 2px auto 0;
+    border: 1px solid #1C3D66;
+    border-radius: 5px;
+    background: linear-gradient(#5E9BD6, #2C5E9C);
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,.55);
+    color: #FFF;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-weight: bold; font-size: 19px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── 窗口 ── */
+  .mac-window {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+  .mac-window.hidden { display: none; }
+
+  .main-window {
+    left: 50%; top: 64px;
+    transform: translateX(-50%);
+    width: 780px; max-width: 96vw;
+    z-index: 10;
+  }
+  .about-window {
+    right: 30px; bottom: 60px;
+    width: 320px;
+    z-index: 20;
+  }
+  .case-window {
+    width: 760px; max-width: 96vw;
+    max-height: 78vh;
+    z-index: 30;
+  }
+
+  .title-bar {
+    height: 20px; flex: 0 0 20px;
+    background: #BFBFBF;
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+    font-size: 11px; font-weight: bold;
+    user-select: none; -webkit-user-select: none;
+    touch-action: none;
+    cursor: default;
+  }
+  .mac-window.is-front .title-bar {
+    background: repeating-linear-gradient(135deg, #8C93A8 0 2px, #C7CDDA 2px 4px);
+  }
+  .win-btns { position: absolute; right: 4px; top: 4px; display: flex; gap: 3px; }
+  .win-close, .win-zoom { width: 11px; height: 11px; }
+  .win-close { background: var(--ink); border: 1px solid #555; }
+  .win-close:active { background: #555; }
+  .win-zoom { background: var(--paper); border: 1px solid var(--ink); }
+  .win-zoom:active { background: #CCC; }
+
+  .window-body {
+    position: relative;
+    overflow-y: auto;
+    padding: 20px 42px 20px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--platinum) var(--platinum-light);
+  }
+  .window-body::-webkit-scrollbar { width: 16px; }
+  .window-body::-webkit-scrollbar-track { background: var(--platinum-light); border-left: 1px solid var(--ink); }
+  .window-body::-webkit-scrollbar-thumb { background: var(--platinum); border: 1px solid var(--ink); }
+  .window-body::-webkit-scrollbar-thumb:hover { background: var(--platinum-dark); }
+
+  .bevel-out {
+    border-top: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+    border-right: 2px solid #555;
+    border-bottom: 2px solid #555;
+    background: var(--platinum);
+  }
+  .bevel-in {
+    border-top: 2px solid #555;
+    border-left: 2px solid #555;
+    border-right: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    background: #D6D6D6;
+  }
+
+  /* ── 主窗口内容 ── */
+  .hero-sub { font-size: 14px; line-height: 1.8; max-width: 600px; }
+  .hero-sub b { font-weight: bold; }
+  .nowrap { white-space: nowrap; }
+
+  .rule { border-top: 2px solid var(--ink); margin: 18px 0 6px; }
+
+  .stats { display: flex; gap: 18px; margin: 12px 0 20px; flex-wrap: wrap; }
+  .stat { display: flex; align-items: center; gap: 8px; }
+  .stat .num {
+    width: 34px; height: 22px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stat .lab { font-size: 11px; }
+
+  .works-head {
+    display: flex; justify-content: space-between;
+    padding: 4px 0;
+    border-top: 1px solid var(--ink);
+    font-size: 12px; font-weight: bold;
+  }
+  .work {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 8px 12px 2px;
+    border-bottom: 1px solid var(--ink);
+    cursor: pointer;
+  }
+  .work:hover { background: var(--ink); color: var(--paper); }
+  .work-num {
+    width: 26px; height: 22px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .work-num.black { background: var(--ink); color: var(--paper); border: 1px solid #333; }
+  .work-title { font-size: 15px; font-weight: bold; line-height: 1.5; }
+  .work-desc { font-size: 12px; margin-top: 3px; }
+  .work-meta { font-size: 11px; color: #3D3D3D; margin-top: 3px; }
+  .work:hover .work-desc, .work:hover .work-meta { color: #CCC; }
+  .work-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+  .work-tag.black { background: var(--ink); color: var(--paper); border: 1px solid #333; }
+  .work:hover .work-tag.black { background: var(--paper); color: var(--ink); border-color: #FFF; }
+  .work-sm { grid-template-columns: 30px 1fr auto; padding: 8px 8px 8px 2px; }
+  .work-sm .work-title { font-size: 13px; }
+  .work-sm .work-desc { display: none; }
+  .works-foot {
+    display: flex; justify-content: space-between;
+    font-size: 11px; padding: 8px 2px 0;
+  }
+
+  /* ── 案例文档内容 ── */
+  .case-cover {
+    border: 2px solid var(--ink);
+    padding: 16px 20px 14px;
+    margin-bottom: 18px;
+    background: var(--paper);
+  }
+  .cc-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 11px; font-weight: bold;
+  }
+  .cc-top .mono { font-family: "MS Sans Serif", Tahoma, sans-serif; }
+  .case-cover h1 {
+    font-size: 23px; font-weight: bold;
+    line-height: 1.35;
+    margin: 12px 0 8px;
+  }
+  .cc-sub { font-size: 12px; line-height: 1.7; }
+  .cc-meta {
+    margin-top: 14px;
+    border-top: 1px solid var(--ink);
+    padding-top: 10px;
+    font-size: 11px; line-height: 1.8;
+    display: grid; gap: 2px;
+  }
+  .cc-meta b { font-weight: bold; }
+
+  .sec { margin: 22px 0 0; }
+  .sec-title {
+    display: flex; align-items: center; gap: 8px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 12px; font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .sec-title::before { content: ""; width: 10px; height: 10px; background: var(--ink); display: inline-block; }
+  .sec-body { font-size: 12px; line-height: 1.8; }
+  .sec-body p + p { margin-top: 8px; }
+
+  .rows .row { border-top: 1px solid var(--ink); padding: 10px 2px; }
+  .rows .row:last-child { border-bottom: 1px solid var(--ink); }
+  .row h4 { font-size: 13px; }
+  .row h4 .lbl { font-size: 11px; font-weight: normal; color: #555; margin-left: 8px; }
+  .row p { font-size: 12px; line-height: 1.75; margin-top: 4px; color: #222; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: 11px; line-height: 1.55; }
+  .tbl th {
+    background: #E9E9E9;
+    border: 1px solid var(--ink);
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: bold;
+  }
+  .tbl td { border: 1px solid var(--ink); padding: 6px 8px; vertical-align: top; }
+
+  .insight {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .insight .small { display: block; font-size: 11px; color: #BBB; margin-top: 8px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    border: 1px solid var(--ink);
+    padding: 2px 10px;
+    font-size: 11px;
+    background: var(--paper);
+  }
+  .chip.black { background: var(--ink); color: var(--paper); }
+
+  .matrix {
+    font-family: "SimSun", "NSimSun", "宋体", "MS Sans Serif", monospace;
+    font-size: 11px;
+    line-height: 1.55;
+    background: #E9E9E9;
+    border: 1px solid var(--ink);
+    padding: 12px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .folder.red .tab, .folder.red .body { border-color: #7A2020; }
+  .folder.red .body { background: linear-gradient(#F2A9A0, #C75B4A); }
+
+  .note-row h4 .lbl { font-weight: normal; color: #555; }
+  .note-core { font-size: 12px; font-weight: bold; line-height: 1.75; margin-top: 6px; }
+  .note-quote {
+    font-size: 12px;
+    color: #222;
+    line-height: 1.8;
+    margin-top: 6px;
+    border-left: 3px solid var(--ink);
+    padding-left: 10px;
+  }
+  .note-stats { font-size: 11px; color: #3D3D3D; margin-top: 8px; }
+  .note-row a { text-decoration: underline; }
+  .note-row a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+
+  .folder.green .tab, .folder.green .body { border-color: #2E5C1E; }
+  .folder.green .body { background: linear-gradient(#A8E07F, #5DA039); }
+
+  .poster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .poster-card {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 8px 8px 6px;
+    cursor: pointer;
+    text-align: center;
+  }
+  .poster-card:hover { background: #E9E9E9; }
+  .poster-frame { border: 1px solid var(--ink); background: var(--paper); padding: 4px; }
+  .poster-frame img { display: block; width: 100%; height: auto; }
+  .poster-title { font-size: 12px; font-weight: bold; margin-top: 7px; }
+
+  .poster-window { width: fit-content; max-width: 92vw; }
+  .poster-window .window-body { padding: 12px; }
+  .poster-window img { display: block; max-width: 86vw; max-height: 74vh; border: 1px solid var(--ink); background: var(--paper); }
+
+  .chain-step { border: 1px solid var(--ink); padding: 10px 12px; background: var(--paper); }
+  .chain-step b { display: block; font-family: "MS Sans Serif", Tahoma, sans-serif; font-size: 11px; margin-bottom: 4px; }
+  .chain-step p { font-size: 12px; line-height: 1.7; color: #222; }
+  .chain-arrow { text-align: center; font-size: 13px; line-height: 1; padding: 3px 0; }
+
+  .footnote {
+    margin-top: 24px;
+    border-top: 1px solid var(--ink);
+    padding-top: 8px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.7;
+  }
+
+  /* ── 关于本机 ── */
+  .about-body { padding: 18px 18px 16px; text-align: center; }
+  .about-name { font-size: 19px; font-weight: bold; }
+  .about-real { font-size: 12px; color: #3D3D3D; margin: 2px 0 10px; }
+  .portrait {
+    width: 64px; height: 76px;
+    margin: 0 auto 12px;
+    background: var(--paper);
+    border-top: 2px solid #555;
+    border-left: 2px solid #555;
+    border-right: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-line { font-size: 11px; line-height: 1.7; }
+
+  /* ── 欢迎对话框 ── */
+  .dialog {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--shadow);
+    z-index: 900;
+  }
+  .dialog-body { padding: 18px 22px 16px; text-align: center; }
+  .dialog-text { font-size: 13px; line-height: 1.7; margin-bottom: 6px; }
+  .dialog-sub { font-size: 11px; color: #3D3D3D; margin-bottom: 14px; }
+  .dialog .btn {
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 11px;
+    padding: 5px 26px;
+    cursor: default;
+  }
+  .dialog .btn:active { transform: translate(1px, 1px); }
+  .dialog .btn:active, .dialog .btn.pressed {
+    border-top-color: #555; border-left-color: #555;
+    border-right-color: #FFF; border-bottom-color: #FFF;
+    background: #D6D6D6;
+  }
+
+  @media (max-width: 860px) {
+    .icons { display: none; }
+    .mac-window {
+      position: static; transform: none;
+      width: 100%; max-width: 100%;
+      margin: 12px auto 0;
+      box-shadow: 2px 2px 0 var(--shadow);
+      max-height: none;
+    }
+    .window-body { max-height: 62vh; }
+    .menu-drop { position: fixed; }
+  }
+</style>
+</head>
+<body>
+
+<div class="menu-bar">
+  <div class="menu-left">
+    <span class="apple">
+      <svg width="13" height="16" viewBox="0 0 13 16" shape-rendering="crispEdges" aria-hidden="true">
+        <rect x="7" y="1" width="2" height="1" fill="#FFF"/>
+        <rect x="8" y="2" width="1" height="1" fill="#FFF"/>
+        <rect x="6" y="2" width="1" height="2" fill="#FFF"/>
+        <rect x="2" y="3" width="9" height="1" fill="#FFF"/>
+        <rect x="1" y="4" width="11" height="1" fill="#FFF"/>
+        <rect x="0" y="5" width="12" height="1" fill="#FFF"/>
+        <rect x="0" y="6" width="11" height="1" fill="#FFF"/>
+        <rect x="1" y="7" width="9" height="1" fill="#FFF"/>
+        <rect x="2" y="8" width="8" height="1" fill="#FFF"/>
+        <rect x="3" y="9" width="8" height="1" fill="#FFF"/>
+        <rect x="3" y="10" width="9" height="1" fill="#FFF"/>
+        <rect x="4" y="11" width="8" height="1" fill="#FFF"/>
+        <rect x="5" y="12" width="6" height="1" fill="#FFF"/>
+        <rect x="6" y="13" width="4" height="1" fill="#FFF"/>
+      </svg>
+    </span>
+    <span class="menu-item">文件
+      <span class="menu-drop">
+        <span class="mi" data-action="close-front">关闭窗口<span class="short">⌘W</span></span>
+      </span>
+    </span>
+    <span class="menu-item">编辑
+      <span class="menu-drop">
+        <span class="mi disabled">剪切</span>
+        <span class="mi disabled">复制</span>
+        <span class="mi disabled">粘贴</span>
+      </span>
+    </span>
+    <span class="menu-item">显示
+      <span class="menu-drop" id="win-menu"></span>
+    </span>
+    <span class="menu-item">特别
+      <span class="menu-drop">
+        <span class="mi" data-action="about">关于本机</span>
+      </span>
+    </span>
+  </div>
+  <div class="menu-right">
+    <span class="menu-item app-name">thyeon</span>
+    <span class="menu-item" id="clock">10:32</span>
+  </div>
+</div>
+
+<div class="desktop">
+
+  <div class="icons">
+    <div class="icon" data-target="win-main">
+      <div class="icon-gfx disk">
+        <div class="case"></div>
+        <div class="led"></div>
+        <div class="vent"><span></span><span></span><span></span></div>
+      </div>
+      <div class="icon-label">硬盘</div>
+    </div>
+    <div class="icon" data-target="win-marsala">
+      <div class="icon-gfx folder">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">Marsala</div>
+    </div>
+    <div class="icon" data-target="win-cases">
+      <div class="icon-gfx folder blue">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">案例档案</div>
+    </div>
+    <div class="icon" data-target="win-notes">
+      <div class="icon-gfx folder red">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">帖文选摘</div>
+    </div>
+    <div class="icon" data-target="win-posters">
+      <div class="icon-gfx folder green">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">视觉实验</div>
+    </div>
+    <div class="icon" data-target="win-about">
+      <div class="icon-gfx info">i</div>
+      <div class="icon-label">关于我</div>
+    </div>
+  </div>
+
+  <!-- ══ 主窗口：作品索引 ══ -->
+  <div class="mac-window main-window" id="win-main" data-title="品牌策划作品集">
+    <div class="title-bar">品牌策划作品集
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <p class="hero-sub">自研一套应用于<strong>品牌咨询和营销策划</strong>领域的可执行知识系统，再用同一套方法，完成<span class="nowrap">四个真实的品牌案例</span>。</p>
+      <div class="rule"></div>
+      <div class="stats">
+        <div class="stat">
+          <span class="num bevel-out">01</span>
+          <span class="lab">自研知识系统</span>
+        </div>
+        <div class="stat">
+          <span class="num bevel-out">04</span>
+          <span class="lab">品牌案例</span>
+        </div>
+        <div class="stat">
+          <span class="num bevel-out">12+</span>
+          <span class="lab">方法论工具</span>
+        </div>
+      </div>
+      <div class="works-head">
+        <span>作品索引</span>
+        <span>共 7 项</span>
+      </div>
+      <div class="work" data-target="win-marsala" tabindex="0">
+        <span class="work-num bevel-out black">01</span>
+        <div>
+          <div class="work-title">Marsala</div>
+          <div class="work-desc">一套应用于品牌咨询和营销策划领域的可执行知识</div>
+          <div class="work-meta">中枢（客户总监）+ 六大模块 + 四层审查</div>
+        </div>
+        <span class="work-tag bevel-out black">系统</span>
+      </div>
+      <div class="work" data-target="win-ordinary" tabindex="0">
+        <span class="work-num bevel-out">02</span>
+        <div>
+          <div class="work-title">The Ordinary 品牌定位深度诊断与重构</div>
+          <div class="work-desc">品牌资产再审计、九道闸门检验、定位与叙事重构</div>
+          <div class="work-meta">九道闸门 · Aaker 五维度 · 完整链检验</div>
+        </div>
+        <span class="work-tag bevel-out">全案</span>
+      </div>
+      <div class="work" data-target="win-comp" tabindex="0">
+        <span class="work-num bevel-out">03</span>
+        <div>
+          <div class="work-title">中国功效护肤赛道竞品矩阵</div>
+          <div class="work-desc">三层纵深竞品分析，8 个品牌，战略群组划分</div>
+          <div class="work-meta">生意 · 产品 · 传播</div>
+        </div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work" data-target="win-lululemon" tabindex="0">
+        <span class="work-num bevel-out">04</span>
+        <div>
+          <div class="work-title">lululemon 中国消费者分层</div>
+          <div class="work-desc">Censydiam 动机罗盘，四层画像，一条 Align 裤的消费者旅程</div>
+          <div class="work-meta">动机分析 · 旅程 · 策略启示</div>
+        </div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work" data-target="win-patagonia" tabindex="0">
+        <span class="work-num bevel-out">05</span>
+        <div>
+          <div class="work-title">Patagonia「不消费」创意拆解</div>
+          <div class="work-desc">Big Idea 四原则与三测试，三个标杆案例的方法论提炼</div>
+          <div class="work-meta">去 Logo 测试 · 竞争复制 · 行动先行</div>
+        </div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work" data-target="win-posters" tabindex="0">
+        <span class="work-num bevel-out">06</span>
+        <div>
+          <div class="work-title">视觉实验</div>
+          <div class="work-desc">四张自制的海报风格实验</div>
+          <div class="work-meta">contour gaze · silence wave · 飞鸟集 v1.0 · 真空非空</div>
+        </div>
+        <span class="work-tag bevel-out">视觉</span>
+      </div>
+      <div class="work" data-target="win-notes" tabindex="0">
+        <span class="work-num bevel-out">07</span>
+        <div>
+          <div class="work-title">帖文选摘</div>
+          <div class="work-desc">Marsala 小红书账号的五篇高互动选摘</div>
+          <div class="work-meta">反常识 · 行为经济学 · 消费者真相</div>
+        </div>
+        <span class="work-tag bevel-out">专栏</span>
+      </div>
+      <div class="works-foot">
+        <span>单击打开项目 · 窗口可拖动</span>
+        <span>作品集 · 2026</span>
+      </div>
+    </div>
+  </div>
+  <!-- ══ 01 · Marsala 系统 ══ -->
+  <div class="mac-window case-window hidden" id="win-marsala" data-title="01 · Marsala">
+    <div class="title-bar">01 · Marsala
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">01</span>
+          <span class="chip black">系统</span>
+        </div>
+        <h1>Marsala</h1>
+        <p class="cc-sub">一套应用于品牌咨询和营销策划领域的可执行知识</p>
+        <div class="cc-meta">
+          <div><b>架构：</b>中枢（客户总监）+ 六大模块 + 四层审查</div>
+          <div><b>角色：</b>本作品集的方法之源，四个案例均由它驱动</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">它是什么</div>
+        <div class="sec-body">
+          <p>Marsala 不是一份方法论清单，而是一套能把策略项目从头跑到尾的操作系统：从项目诊断、研究拆解，到创意输出与经营审查，每个环节都有对应的模块、工具与审查关卡。</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">运行结构</div>
+        <div class="rows">
+          <div class="row">
+            <h4>中枢 · 客户总监</h4>
+            <p>由客户总监统一调度项目进程，保证判断一致、口径统一。</p>
+          </div>
+          <div class="row">
+            <h4>六大模块</h4>
+            <p>品牌策略、竞品研究、消费者洞察、创意方向、媒介策略、经营审查。</p>
+          </div>
+          <div class="row">
+            <h4>四层审查</h4>
+            <p>证据治理与审查贯穿每个结论，让每一个判断都有出处。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">方法论工具（12+）</div>
+        <div class="chips">
+          <span class="chip">品牌定位九道闸门</span>
+          <span class="chip">Aaker 品牌资产五维度</span>
+          <span class="chip">三层纵深竞品分析</span>
+          <span class="chip">Censydiam 动机罗盘</span>
+          <span class="chip">消费者旅程与 MOT</span>
+          <span class="chip">Big Idea 四原则</span>
+          <span class="chip">去 Logo 识别测试</span>
+          <span class="chip">竞争复制测试</span>
+          <span class="chip">完整链检验</span>
+          <span class="chip">风险矩阵与纠错机制</span>
+          <span class="chip">致死数据定义</span>
+          <span class="chip">证据标注与治理审查</span>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">能力与案例映射</div>
+        <table class="tbl">
+          <tr><th>能力维度</th><th>对应案例</th></tr>
+          <tr><td>品牌定位推导</td><td>The Ordinary 全案（九道闸门）</td></tr>
+          <tr><td>品牌资产审计</td><td>The Ordinary 全案（Aaker 五维度）</td></tr>
+          <tr><td>竞品分析</td><td>功效护肤赛道三层纵深分析</td></tr>
+          <tr><td>消费者洞察</td><td>lululemon Censydiam 动机分析</td></tr>
+          <tr><td>Big Idea 开发</td><td>Patagonia 创意拆解</td></tr>
+          <tr><td>策略到创意转换</td><td>The Ordinary 完整链 + Patagonia 行动先行</td></tr>
+        </table>
+      </div>
+
+      <div class="footnote">每个项目均执行证据标注：区分一手数据、品牌公开行为与逻辑推导，结论可追溯、可复核。</div>
+    </div>
+  </div>
+
+  <!-- ══ 02 · The Ordinary 全案 ══ -->
+  <div class="mac-window case-window hidden" id="win-ordinary" data-title="02 · The Ordinary 品牌定位深度诊断与重构">
+    <div class="title-bar">02 · The Ordinary 品牌定位深度诊断与重构
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">02</span>
+          <span class="chip black">全案</span>
+        </div>
+        <h1>The Ordinary 品牌定位<br>深度诊断与重构</h1>
+        <p class="cc-sub">当品牌行为已经进化到「科学基准线」，品牌叙事还停留在「成分透明」——一次九道闸门驱动的定位重构。</p>
+        <div class="cc-meta">
+          <div><b>展示能力：</b>品牌定位推导 · 策略诊断 · 品牌资产审计 · 品牌叙事构建</div>
+          <div><b>方法论：</b>Marsala 九道闸门 · Aaker 五维度 · 定位理论</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">执行摘要</div>
+        <div class="insight">The Ordinary 的定位正在从「成分透明」漂移至「科学护肤基准线」。<br>品牌没有宣布旧定位的终结，也没有确立新定位的边界——<br>它需要的不是重新定位，而是正式宣布已经完成的进化。<span class="small">基于 2020-2025 品牌行为追踪（公开资料）</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">品牌资产再审计（Aaker 五维度）</div>
+        <div class="rows">
+          <div class="row">
+            <h4>定位层</h4>
+            <p>「科学透明 / 成分民主」——核心但正在漂移，需要重新定义边界。</p>
+          </div>
+          <div class="row">
+            <h4>证明点</h4>
+            <p>O. Lab 创新实验室、酵母发酵技术、ELC 集团技术储备、临床数据。</p>
+          </div>
+          <div class="row">
+            <h4>故事层</h4>
+            <p>「成分+浓度」命名历史、实验室美学、从反建制到体系化的转型叙事。</p>
+          </div>
+        </div>
+        <p class="sec-body" style="margin-top:10px;">关键动作：把「成分+浓度」命名从定位层降为故事层、极简包装降为证明点，让新定位入主定位层——不再混淆「我们曾经是谁」和「我们正在成为谁」。</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">九道闸门摘要</div>
+        <div class="sec-body" style="margin-bottom:10px;">九道闸门：候选穷举与收敛 → 机制识别 → 机制独立性 → 因果层级 → 证伪矩阵 → 必要/充分性 → 基底对称性 → 节点定义纯化 → 完整链检验 → 定位输出声明。以下为本案例的关键闸口。</div>
+        <div class="rows">
+          <div class="row">
+            <h4>候选穷举：A-F</h4>
+            <table class="tbl" style="margin-top:8px;">
+              <tr><th>候选</th><th>内容</th><th>去留</th></tr>
+              <tr><td>A</td><td>成分护肤民主化</td><td>保留，降级为历史定位</td></tr>
+              <tr><td>B</td><td>科学护肤基准线</td><td>保留</td></tr>
+              <tr><td>C</td><td>成分透明运动</td><td>淘汰</td></tr>
+              <tr><td>D</td><td>尖端技术普及者</td><td>保留</td></tr>
+              <tr><td>E</td><td>问题肌解决方案</td><td>保留</td></tr>
+              <tr><td>F</td><td>第一瓶精华</td><td>淘汰</td></tr>
+            </table>
+            <p style="margin-top:8px;">淘汰理由：C「运动」有终点而品牌没有，ELC 母公司也不适合反行业运动定位；F 与「GF 15% / Volufiline」等进阶产品行为矛盾。收敛至 B / D / E。</p>
+          </div>
+          <div class="row">
+            <h4>因果层级</h4>
+            <p>D（尖端技术普及）与 E（问题肌解决方案）都是 B（科学基准线）的下游执行——B 是唯一的定位候选。</p>
+          </div>
+          <div class="row">
+            <h4>证伪矩阵</h4>
+            <p>如果 TO 发布 ¥200+ 产品后消费者反应是「背叛」而非「还是比竞品便宜」，定位不成立。2023 年粉红精华（$17）已实际通过过一次测试。</p>
+          </div>
+          <div class="row">
+            <h4>完整链检验</h4>
+            <div class="chain">
+              <div class="chain-step"><b>定位</b><p>The Ordinary 是功效护肤的科学基准线。任何比它贵的产品，都必须解释贵在哪里。</p></div>
+              <div class="chain-arrow">↓</div>
+              <div class="chain-step"><b>传播主张</b><p>「好护肤品不需要那么多钱。我们知道每个成分的成本——我们有责任告诉你，你付的钱去了哪里。」</p></div>
+              <div class="chain-arrow">↓</div>
+              <div class="chain-step"><b>创意方向</b><p>「定价标签」系列：每个产品标注实际成本、对比同类竞品价格；「基准宣言」品牌片：视觉语言用标尺、量杯、砝码。</p></div>
+              <div class="chain-arrow">↓</div>
+              <div class="chain-step"><b>媒介执行</b><p>The Truth Should Be Ordinary 平台深度长文 · TikTok / Instagram 成分成本对比短视频 · 包装附「价格透明卡」 · 户外标尺视觉（一端的 TO 价格 vs 另一端的他们价格）。</p></div>
+              <div class="chain-arrow">↓</div>
+              <div class="chain-step"><b>行为预测</b><p>消费者比较竞品时主动追问溢价理由 · 「TO 价格」成为比价参考 · 竞品被迫在官方渠道回应定价逻辑 · 部分消费者因「不值得多付」而非「便宜」转向 TO。</p></div>
+            </div>
+            <p style="margin-top:8px;">结论：每一个下游环节都能从上游自然推导，没有断裂——链检验通过。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">新定位</div>
+        <div class="insight">The Ordinary 是功效护肤的科学基准线。<br>任何比它贵的产品，都必须解释贵在哪里。<span class="small">策略定位（对内）：「标准透明」。价值主张（对外）：「好护肤品不需要那么多钱。」</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">商业四问</div>
+        <table class="tbl">
+          <tr><th>问题</th><th>回答</th></tr>
+          <tr><td>增长</td><td>基准线随品类扩大自动增值，并为价格上探提供逻辑出口：基准 ≠ 便宜，基准 = 合理</td></tr>
+          <tr><td>利润</td><td>消费者买到的是「没花冤枉钱」的公平感，比价格敏感型忠诚更抗通胀、更抗竞品降价</td></tr>
+          <tr><td>壁垒</td><td>ELC 成本结构 + 十年透明信誉 + O. Lab 内容资产，沟通可以复制，这些复制不了</td></tr>
+          <tr><td>老客</td><td>风险真实存在，需要一次「我们升级了，不是背离了」的正式沟通</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">品牌叙事重构</div>
+        <table class="tbl">
+          <tr><th>要素</th><th>新叙事</th></tr>
+          <tr><td>使命</td><td>让每个人用合理价格获得科学护肤——「合理」不再由品牌说了算</td></tr>
+          <tr><td>愿景</td><td>成为全球功效护肤的基准线——想知道靠谱护肤品该值多少钱时，人们看 The Ordinary</td></tr>
+          <tr><td>价值观</td><td>科学诚实 · 价格诚实 · 标准诚实</td></tr>
+          <tr><td>人格</td><td>实验室里告诉你真相的研究员——不冷漠，但不讨好</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Big Idea：THE MEASURE（量度）</div>
+        <div class="sec-body">
+          <p>一切测量都需要基准：温度有摄氏零度，长度有一米，功效护肤也需要一个基准。The Ordinary 就是那把尺子。</p>
+        </div>
+        <div class="rows" style="margin-top:12px;">
+          <div class="row">
+            <h4>「尺子」系列</h4>
+            <p>KV：一支 TO 精华旁边放一把标尺，文案「量一量你付的钱」。</p>
+          </div>
+          <div class="row">
+            <h4>「为什么贵」系列</h4>
+            <p>「成分重叠度 80%，一个 $10，一个 $80。我们只是好奇：剩下那 $70 去了哪里？」</p>
+          </div>
+          <div class="row">
+            <h4>「基准宣言」</h4>
+            <p>「1755 年，我们知道了一米有多长。2026 年，我们该知道一瓶精华值多少钱。」</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">风险与纠错</div>
+        <div class="rows">
+          <div class="row">
+            <h4>关键风险</h4>
+            <p>「基准线」被理解为「低端线」；ELC 身份削弱挑战者可信度；竞品模仿透明定位；价格上探引发老用户反弹。</p>
+          </div>
+          <div class="row">
+            <h4>致死数据</h4>
+            <p>¥200+ 产品发布后核心情绪是「背叛」；消费者用竞品价格而非 TO 价格做基准；竞品复制成本透明后差异消失。</p>
+          </div>
+          <div class="row">
+            <h4>三步退路</h4>
+            <p>撤回外部定位表达 → 保留产品策略 → 从「公开成本结构」退到「成本结构优化」。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footnote">证据标注：品牌资产判断基于公开行为与追踪报告（可查证）；定位候选评估为逻辑推导，需消费者端数据验证后进入执行层。</div>
+    </div>
+  </div>
+  <!-- ══ 03 · 中国功效护肤赛道竞品矩阵 ══ -->
+  <div class="mac-window case-window hidden" id="win-comp" data-title="03 · 中国功效护肤赛道竞品矩阵">
+    <div class="title-bar">03 · 中国功效护肤赛道竞品矩阵
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">03</span>
+          <span class="chip black">专题</span>
+        </div>
+        <h1>中国功效护肤赛道<br>竞品矩阵</h1>
+        <p class="cc-sub">用生意、产品、传播三层纵深，把 8 个竞品放进一张地图，找出赛道里真正没人占的位置。</p>
+        <div class="cc-meta">
+          <div><b>展示能力：</b>市场研究 · 竞品分析 · 战略群组判断</div>
+          <div><b>方法论：</b>Marsala 市场研究三层结构（生意—产品—传播）</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">赛道与规模</div>
+        <table class="tbl">
+          <tr><th>指标</th><th>数据</th><th>解读</th></tr>
+          <tr><td>市场规模（2024）</td><td>广义功效护肤约 1000-1200 亿元</td><td>占护肤品整体约 23%，采用广义口径</td></tr>
+          <tr><td>赛道增速</td><td>CAGR 约 15-25%</td><td>护肤品整体同比下滑约 2.8%，增速差约 15-20 个百分点</td></tr>
+          <tr><td>集中度</td><td>CR5 约 45-50%</td><td>按品牌统计头部集中；按企业集团统计约 25-30%，格局仍分散</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">竞品矩阵（8 品牌）</div>
+        <table class="tbl">
+          <tr><th>阵营</th><th>品牌</th><th>核心单品</th><th>价格带</th><th>2024 趋势</th></tr>
+          <tr><td>国际</td><td>修丽可</td><td>CE 精纯精华</td><td>¥300-1720</td><td>稳健</td></tr>
+          <tr><td>国际</td><td>理肤泉</td><td>B5 修复霜</td><td>¥100-400</td><td>稳健</td></tr>
+          <tr><td>国内上市</td><td>薇诺娜</td><td>舒敏保湿特护霜</td><td>¥100-600</td><td>-5.45%</td></tr>
+          <tr><td>国内上市</td><td>珀莱雅</td><td>红宝石精华</td><td>¥100-500</td><td>稳健增长</td></tr>
+          <tr><td>国内上市</td><td>可复美</td><td>胶原棒</td><td>¥150-500</td><td>+62.9%</td></tr>
+          <tr><td>国内上市</td><td>润百颜</td><td>白纱布屏障次抛</td><td>¥100-400</td><td>-22.63%</td></tr>
+          <tr><td>新锐</td><td>HBN</td><td>视黄醇精华乳</td><td>¥100-400</td><td>+6.9%</td></tr>
+          <tr><td>基线参考</td><td>The Ordinary</td><td>高浓度单一成分</td><td>¥50-200（海外）</td><td>全球稳健</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">三层发现</div>
+        <div class="rows">
+          <div class="row">
+            <h4>生意层<span class="lbl">增长动力正在换挡</span></h4>
+            <p>可复美（+62.9%）与珀莱雅领跑，薇诺娜与润百颜下滑——敏感肌赛道进入存量洗牌，增长动力已从「敏感肌」转向「抗衰」与「修护」。</p>
+          </div>
+          <div class="row">
+            <h4>产品层<span class="lbl">成分是入场券，不是差异化</span></h4>
+            <p>几乎每个品牌都在讲成分，差异化空间只剩「为什么是你的这个成分」。三大品类陷阱：敏感肌拥挤、抗衰泛化、次抛同质化。</p>
+          </div>
+          <div class="row">
+            <h4>传播层<span class="lbl">「科学」正在被过度使用</span></h4>
+            <p>拥挤区：科学/临床话语、敏感肌场景、成分+功效组合拳。空白区：价格诚实沟通、反营销内容、成分民主化叙事——均无人占据。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">战略群组（价格 × 专业度）</div>
+<pre class="matrix">                    高专业度
+                       ↑
+        修丽可         │        （空白区）
+        ¥300-1600      │
+    ────────────────────┼──────────────────────→
+    高价格             │               低价格
+                       │
+        薇诺娜/可复美  │     珀莱雅/HBN/理肤泉
+        ¥100-600       │     ¥100-500
+                       │
+                  （空白区）     The Ordinary（海外）
+                       ↓          ¥50-200
+                    低专业度（品牌宣称层面）</pre>
+        <p class="sec-body" style="margin-top:8px;">横轴 = 价格，纵轴 = 专业度（品牌宣称层面）。右上「空白区」= 低价 × 高专业，是「科学正统的极致性价比」的机会位；The Ordinary 因不做科学权威叙事，目前落在右下。</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">赛道核心矛盾</div>
+        <div class="insight">当所有品牌都在讲科学，科学就不再是差异化——它变成了新的基准线。<br>下一阶段的竞争是：谁的科学更可感知，谁更敢说真话，谁的价格更诚实。</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">The Ordinary 的参照价值</div>
+        <div class="sec-body">
+          <p>它对这个赛道最大的参照价值不是卖什么产品，而是证明了一件事：在被「科学权威」笼罩的品类里，「把定价权还给消费者」可以成为一种品牌定位。没有医生背书、没有临床广告、没有明星代言——却让消费者觉得「这是我自己的选择，不是被说服的」。这个逻辑在中国功效护肤市场尚未被任何品牌占据。</p>
+        </div>
+      </div>
+
+      <div class="footnote">证据标注：上市公司营收来自 2024 年报（可查证）；非上市品牌为区间估算；产品与传播层来自电商前台与社媒公开内容观察。</div>
+    </div>
+  </div>
+
+  <!-- ══ 04 · lululemon 中国消费者分层 ══ -->
+  <div class="mac-window case-window hidden" id="win-lululemon" data-title="04 · lululemon 中国消费者分层">
+    <div class="title-bar">04 · lululemon 中国消费者分层
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">04</span>
+          <span class="chip black">专题</span>
+        </div>
+        <h1>lululemon 中国<br>消费者分层</h1>
+        <p class="cc-sub">当品牌从品类专家变成生活方式品牌，消费者研究框架该怎么改——用动机分层回答这个问题。</p>
+        <div class="cc-meta">
+          <div><b>展示能力：</b>消费者研究 · 动机分析 · 用户分层 · 消费者旅程</div>
+          <div><b>方法论：</b>Censydiam 动机模型 · 消费者旅程 · MOT 识别</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">背景</div>
+        <div class="sec-body">
+          <p>2024 年 lululemon 中国营收首次突破 10 亿美元，门店超 130 家（计划 2026 年达 220 家）。高速扩张的同时，消费者结构正在剧烈变化——这是研究它最好的时机。</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">动机迁移：从运动工具到身份符号</div>
+        <div class="sec-body" style="margin-bottom:10px;">Censydiam 是一个八动机罗盘模型（活力 · 掌控 · 权力 · 认可 · 社交愉悦 · 归属 · 享乐 · 安全），回答的不是「谁在买」，而是「为什么买」。</div>
+        <table class="tbl">
+          <tr><th>市场</th><th>支配动机</th><th>品牌与消费者的关系</th></tr>
+          <tr><td>北美（早期）</td><td>掌控 + 活力</td><td>「我运动，所以穿 lululemon」——运动的工具</td></tr>
+          <tr><td>中国（当前）</td><td>认可 + 掌控</td><td>「穿 lululemon，说明我是什么样的女性」——身份的符号</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">四层动机画像</div>
+        <div class="rows">
+          <div class="row">
+            <h4>核心瑜伽人<span class="lbl">约 15-20%</span></h4>
+            <p>支配动机：掌控。每周 3-5 次瑜伽，为功能付费。品牌 = 工具，忠诚于品类场景而非品牌本身。</p>
+          </div>
+          <div class="row">
+            <h4>都市高知女性<span class="lbl">约 40-50% · 当前增长引擎</span></h4>
+            <p>支配动机：认可。运动与通勤混搭，Define Jacket / Scuba 为核心单品。品牌 = 身份标签，为身份付费。</p>
+          </div>
+          <div class="row">
+            <h4>泛健康生活方式人群<span class="lbl">约 25-30%</span></h4>
+            <p>支配动机：社交愉悦 + 归属。偶尔运动，购买基于「好看」「舒服」「姐妹们都在穿」。品牌 = 社交货币。</p>
+          </div>
+          <div class="row">
+            <h4>男性消费者<span class="lbl">约 5-10% · 增长中</span></h4>
+            <p>支配动机：掌控 + 认可。商务休闲混搭为主，ABC 裤为核心单品。品牌 = 聪明的舒适选择。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">核心洞察</div>
+        <div class="insight">lululemon 对「都市高知女性」的价值不是运动功能，而是「我虽然很忙，但我没有放弃自己」的视觉证据。<br>穿 lululemon 去办公室，是对自己和周围人的 silent signal：我是自律的、有品质感的、不会因为工作而邋遢的女性。<span class="small">这解释了为什么它在中国写字楼里远比在瑜伽馆里更常见</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">一条 Align 裤的旅程</div>
+        <div class="sec-body" style="margin-bottom:10px;">旅程六阶段：认知 → 考虑 → 购买 → 使用 → 复购 → 推荐。其中两个环节最值得做策略动作：</div>
+        <div class="rows">
+          <div class="row">
+            <h4>关键 MOT：进店试穿</h4>
+            <p>「摸到面料」和「穿到身上」是价格到价值的转换器——没有试穿，¥750 的瑜伽裤永远显得贵。线下门店的角色不是销售，是免费体验中心。</p>
+          </div>
+          <div class="row">
+            <h4>关键 MOT：首次复购</h4>
+            <p>从「试试看」到「信任品牌」的转折点——第一条可能是冲动或朋友推荐，第二条是自己选择的。首次购买后的 30 天跟进是增长杠杆。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">方法论反思：画像失效，动机分层胜出</div>
+        <div class="insight">同一个人 × 同一个品牌 × 四种动机 × 四种产品 × 四种内容。<br>「28 岁上海陆家嘴投行女」在四个情景下买 lululemon 的理由完全不同——画像驱动策略只看到「她是谁」，动机分层看到「她在这个场景下想成为谁」。</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">策略启示</div>
+        <div class="rows">
+          <div class="row">
+            <h4>不要恐惧「非运动场景」</h4>
+            <p>「穿 lululemon 去办公室」不是品牌稀释，是中国市场的核心增长动力。</p>
+          </div>
+          <div class="row">
+            <h4>区分工具型与符号型产品</h4>
+            <p>Align / Wunder Train 讲面料科技；Define / Scuba 讲「什么样的女性穿这个」——沟通逻辑完全不同。</p>
+          </div>
+          <div class="row">
+            <h4>社群 = 归属感，不是热汗课</h4>
+            <p>中国社群的价值是「看到这么多优秀的女生都穿 lululemon，我和她们是一类人」。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footnote">证据标注：动机分布与分层比例为基于公开行为与品类知识的定性判断；旅程触点基于品牌公开信息。真实商业环境中需定量调研与深访验证。</div>
+    </div>
+  </div>
+
+  <!-- ══ 05 · Patagonia「不消费」创意拆解 ══ -->
+  <div class="mac-window case-window hidden" id="win-patagonia" data-title="05 · Patagonia「不消费」创意拆解">
+    <div class="title-bar">05 · Patagonia「不消费」创意拆解
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">05</span>
+          <span class="chip black">专题</span>
+        </div>
+        <h1>Patagonia「不消费」<br>创意拆解</h1>
+        <p class="cc-sub">一个敢说「别买」的品牌，为什么卖得比谁都好——把品牌价值观变成创意引擎的方法论。</p>
+        <div class="cc-meta">
+          <div><b>展示能力：</b>Big Idea 开发 · 创意评估 · 品牌价值观表达</div>
+          <div><b>方法论：</b>Big Idea 四原则 · 去 Logo 识别测试 · 品牌归属测试 · 竞争复制测试</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Big Idea</div>
+        <div class="insight">「我们做生意不是为了赚钱——赚钱是为了保护我们热爱的地球。」<br>这不是一句口号。这是 Patagonia 的组织设计原则。</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Big Idea 四原则检验</div>
+        <table class="tbl">
+          <tr><th>原则</th><th>检验</th></tr>
+          <tr><td>策略性</td><td>与品牌定位完全一致，不是附加在品牌上的 campaign，是品牌本身</td></tr>
+          <tr><td>延展性</td><td>同一个 Big Idea 跨形式、跨媒介、跨年份：反广告、修补服务、政治表态、捐出公司</td></tr>
+          <tr><td>记忆性</td><td>「那个说别买自己衣服的品牌」——一句话就能识别</td></tr>
+          <tr><td>差异性</td><td>只有 Patagonia 能用——它用 50 年的行为建立了「说别买是真的在关心」的信任</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">三个标杆案例</div>
+        <div class="rows">
+          <div class="row">
+            <h4>2011「Don't Buy This Jacket」</h4>
+            <p>黑色星期五，纽约时报整版广告，详述一件夹克的环境成本。结果：销量增长约 30%（9 个月）。创意本质是商业行为在传播层的表达——它真的希望消费者少买。</p>
+          </div>
+          <div class="row">
+            <h4>2017「The President Stole Your Land」</h4>
+            <p>官网首页全黑，一行白字。媒介选择即策略：占领自己的销售渠道做政治表态，零媒体费，每个想买东西的人都被迫看到。克制 = 自信。</p>
+          </div>
+          <div class="row">
+            <h4>2022「Earth is now our only shareholder」</h4>
+            <p>创始人把公司所有权转让给地球：2% 投票权归信托，98% 利润用于环保。这不是 campaign，是公司法律结构的根本改变——创意只是把这件事告诉世界。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">方法论提炼</div>
+        <div class="rows">
+          <div class="row">
+            <h4>行动先行</h4>
+            <p>每一次创意爆发前面都有一个真实的商业决策。如果品牌没做过值得传播的事，再好的创意也救不了。</p>
+          </div>
+          <div class="row">
+            <h4>品牌说了算</h4>
+            <p>创意不需要「消费者喜欢」，只需要「和品牌一致」。怕的不是得罪人，是背叛自己。</p>
+          </div>
+          <div class="row">
+            <h4>牺牲短期利益，换长期信任</h4>
+            <p>黑五的销量、新品的收入、家族的财富——每一次牺牲都是一次信任充值。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">竞争复制测试</div>
+        <table class="tbl">
+          <tr><th>复制层级</th><th>需要什么</th><th>难度</th></tr>
+          <tr><td>文案层</td><td>换一个产品名</td><td>极低</td></tr>
+          <tr><td>行为层</td><td>真的掏钱、真的修衣服、真的改变商业模式</td><td>极高</td></tr>
+          <tr><td>信誉层</td><td>50 年持续做同一件事</td><td>不可能复制</td></tr>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">启示</div>
+        <div class="insight">创意不是想出来的——它是品牌行为在传播层的投影。<br>品牌信任不是靠「说」建立的，是靠「牺牲」证明的。<br>去 Logo 识别测试不是视觉测试，是行为测试：真正强大的品牌识别不是视觉符号，是行为模式。</div>
+      </div>
+
+      <div class="footnote">证据标注：案例事实来自品牌官网公开信、纽约时报广告与公开媒体报道（可查证）；拆解分析为方法论框架下的主观分析。</div>
+    </div>
+  </div>
+  <!-- ══ 帖文选摘 ══ -->
+  <div class="mac-window case-window hidden" id="win-notes" data-title="帖文选摘">
+    <div class="title-bar">帖文选摘
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="works-head">
+        <span>Marsala · 小红书</span>
+        <span>5 篇 · 数据截至 2026-08</span>
+      </div>
+      <div class="rows">
+        <div class="row note-row">
+          <h4>01 · 用户画像是一个谎言<span class="lbl">2026.07.04</span></h4>
+          <p class="note-core">核心观点：做消费者研究的最终产出不是用户画像，而是一张「用户卡住的地图」。</p>
+          <p class="note-quote">「人是情境性的，不是标签性的。用户画像把一个人的全部复杂性压缩成一张静态照片——用一把对付照片的剑，去砍一个移动的靶子。」</p>
+          <p class="note-stats">赞 40 · 收藏 47 · 评论 8 · 涨粉 5 · <a href="http://xhslink.cn/o/8SHIwvrTDsk" target="_blank" rel="noopener">阅读全文</a></p>
+        </div>
+        <div class="row note-row">
+          <h4>02 · 为什么「免费」比「便宜一块钱」有用<span class="lbl">2026.07.14</span></h4>
+          <p class="note-core">核心观点：免费不是「价格为零」，而是一个完全不同的心理类别——交易计算被跳过，你直接伸手拿了。</p>
+          <p class="note-quote">「理性知道所有的套路。但决策在理性赶到之前就已经做完了。」</p>
+          <p class="note-stats">赞 27 · 收藏 28 · 评论 11 · 涨粉 3 · <a href="http://xhslink.cn/o/22w9vHbPblk" target="_blank" rel="noopener">阅读全文</a></p>
+        </div>
+        <div class="row note-row">
+          <h4>03 · 产品不行，别让营销替你扛<span class="lbl">2026.07.10</span></h4>
+          <p class="note-core">核心观点：营销费用最高的品牌，常常不是最成功的品牌，而是产品最留不住人的品牌。</p>
+          <p class="note-quote">「营销能做什么？能让不知道你的人知道你。能让对你无感的人产生一点好奇。能让已经在犹豫的人下定决心。就这些。」</p>
+          <p class="note-stats">赞 29 · 收藏 27 · 评论 1 · 涨粉 4 · <a href="http://xhslink.cn/o/AUQmhQ6O4a2" target="_blank" rel="noopener">阅读全文</a></p>
+        </div>
+        <div class="row note-row">
+          <h4>04 · 没人在乎你的品牌<span class="lbl">2026.07.27</span></h4>
+          <p class="note-core">核心观点：接受了「没人在乎你」的品牌，反而会被人真正在乎。</p>
+          <p class="note-quote">「消费者的生活才是舞台，你只是一个路过的配角。品牌不能制造感受，品牌只能在感受发生的瞬间刚好在场。」</p>
+          <p class="note-stats">赞 36 · 收藏 42 · 评论 0 · 涨粉 4 · <a href="http://xhslink.cn/o/AeF9vBLeimj" target="_blank" rel="noopener">阅读全文</a></p>
+        </div>
+        <div class="row note-row">
+          <h4>05 · 品牌不是你想的那样<span class="lbl">2026.07.01</span></h4>
+          <p class="note-core">核心观点：品牌不是创造出来的，是被发现的。</p>
+          <p class="note-quote">「品牌不是自我表达，是被选择。没有行动的故事叫文案，不叫品牌。」</p>
+          <p class="note-stats">赞 21 · 收藏 29 · 评论 0 · 涨粉 6 · <a href="http://xhslink.cn/o/1psWS9qqIoU" target="_blank" rel="noopener">阅读全文</a></p>
+        </div>
+      </div>
+      <div class="works-foot">
+        <span>小红书账号：<a href="https://xhslink.cn/m/5zYS5a5KTAh" target="_blank" rel="noopener">Marsala</a></span>
+        <span>选摘均为原文摘录</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 视觉实验 ══ -->
+  <div class="mac-window case-window hidden" id="win-posters" data-title="视觉实验">
+    <div class="title-bar">视觉实验
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="works-head">
+        <span>海报风格实验</span>
+        <span>4 张</span>
+      </div>
+      <div class="poster-grid">
+        <div class="poster-card" data-target="win-post-1" tabindex="0">
+          <div class="poster-frame"><img src="assets/posters/contour-gaze-thumb.png" alt="contour gaze"></div>
+          <div class="poster-title">contour gaze</div>
+        </div>
+        <div class="poster-card" data-target="win-post-2" tabindex="0">
+          <div class="poster-frame"><img src="assets/posters/silence-wave-thumb.png" alt="silence wave"></div>
+          <div class="poster-title">silence wave</div>
+        </div>
+        <div class="poster-card" data-target="win-post-3" tabindex="0">
+          <div class="poster-frame"><img src="assets/posters/feiniaoji-v1-thumb.png" alt="飞鸟集 v1.0"></div>
+          <div class="poster-title">飞鸟集 v1.0</div>
+        </div>
+        <div class="poster-card" data-target="win-post-4" tabindex="0">
+          <div class="poster-frame"><img src="assets/posters/zhenkong-feikong-thumb.png" alt="真空非空"></div>
+          <div class="poster-title">真空非空</div>
+        </div>
+      </div>
+      <div class="works-foot">
+        <span>单击查看大图</span>
+        <span>均为独立制作</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 海报查看器 ══ -->
+  <div class="mac-window poster-window case-window hidden" id="win-post-1" data-title="contour gaze">
+    <div class="title-bar">contour gaze
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body"><img src="assets/posters/contour-gaze.png" alt="contour gaze" loading="lazy"></div>
+  </div>
+  <div class="mac-window poster-window case-window hidden" id="win-post-2" data-title="silence wave">
+    <div class="title-bar">silence wave
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body"><img src="assets/posters/silence-wave.png" alt="silence wave" loading="lazy"></div>
+  </div>
+  <div class="mac-window poster-window case-window hidden" id="win-post-3" data-title="飞鸟集 v1.0">
+    <div class="title-bar">飞鸟集 v1.0
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body"><img src="assets/posters/feiniaoji-v1.png" alt="飞鸟集 v1.0" loading="lazy"></div>
+  </div>
+  <div class="mac-window poster-window case-window hidden" id="win-post-4" data-title="真空非空">
+    <div class="title-bar">真空非空
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body"><img src="assets/posters/zhenkong-feikong.png" alt="真空非空" loading="lazy"></div>
+  </div>
+
+  <!-- ══ 案例档案 ══ -->
+  <div class="mac-window case-window hidden" id="win-cases" data-title="案例档案">
+    <div class="title-bar">案例档案
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="works-head">
+        <span>全部项目</span>
+        <span>7 项</span>
+      </div>
+      <div class="work work-sm" data-target="win-marsala" tabindex="0">
+        <span class="work-num bevel-out black">01</span>
+        <div><div class="work-title">Marsala</div></div>
+        <span class="work-tag bevel-out black">系统</span>
+      </div>
+      <div class="work work-sm" data-target="win-ordinary" tabindex="0">
+        <span class="work-num bevel-out">02</span>
+        <div><div class="work-title">The Ordinary 品牌定位深度诊断与重构</div></div>
+        <span class="work-tag bevel-out">全案</span>
+      </div>
+      <div class="work work-sm" data-target="win-comp" tabindex="0">
+        <span class="work-num bevel-out">03</span>
+        <div><div class="work-title">中国功效护肤赛道竞品矩阵</div></div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work work-sm" data-target="win-lululemon" tabindex="0">
+        <span class="work-num bevel-out">04</span>
+        <div><div class="work-title">lululemon 中国消费者分层</div></div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work work-sm" data-target="win-patagonia" tabindex="0">
+        <span class="work-num bevel-out">05</span>
+        <div><div class="work-title">Patagonia「不消费」创意拆解</div></div>
+        <span class="work-tag bevel-out">专题</span>
+      </div>
+      <div class="work work-sm" data-target="win-posters" tabindex="0">
+        <span class="work-num bevel-out">06</span>
+        <div><div class="work-title">视觉实验</div></div>
+        <span class="work-tag bevel-out">视觉</span>
+      </div>
+      <div class="work work-sm" data-target="win-notes" tabindex="0">
+        <span class="work-num bevel-out">07</span>
+        <div><div class="work-title">帖文选摘</div></div>
+        <span class="work-tag bevel-out">专栏</span>
+      </div>
+      <div class="works-foot">
+        <span>单击打开项目</span>
+        <span>共 7 项</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 关于本机 ══ -->
+  <div class="mac-window about-window" id="win-about" data-title="关于本机">
+    <div class="title-bar">关于本机
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="about-body">
+      <div class="portrait">
+        <svg width="30" height="47" viewBox="0 0 7 11" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="3" y="0" width="1" height="1" fill="#000"/>
+          <rect x="2" y="1" width="3" height="1" fill="#000"/>
+          <rect x="1" y="2" width="5" height="1" fill="#000"/>
+          <rect x="1" y="3" width="5" height="1" fill="#000"/>
+          <rect x="2" y="4" width="3" height="1" fill="#000"/>
+          <rect x="2" y="5" width="3" height="1" fill="#000"/>
+          <rect x="2" y="6" width="3" height="1" fill="#000"/>
+          <rect x="0" y="8" width="6" height="1" fill="#000"/>
+          <rect x="0" y="9" width="5" height="1" fill="#000"/>
+          <rect x="1" y="10" width="4" height="1" fill="#000"/>
+        </svg>
+      </div>
+      <div class="about-name">thyeon</div>
+      <div class="about-real">周煜淏</div>
+      <div class="about-line"><strong>联系方式：</strong><a href="mailto:thyeon@yeah.net">thyeon@yeah.net</a></div>
+    </div>
+  </div>
+
+  <!-- ══ 欢迎对话框 ══ -->
+  <div class="dialog" id="welcome">
+    <div class="title-bar">欢迎</div>
+    <div class="dialog-body">
+      <div class="dialog-text">欢迎查看thyeon的品牌策划作品集。</div>
+      <div class="dialog-sub">本机已加载 7 个项目，单击即可打开。</div>
+      <button class="btn bevel-out" id="welcome-ok">好</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── 时钟 ──
+  var clockEl = document.getElementById("clock");
+  function tickClock() {
+    var d = new Date();
+    var h = d.getHours(), m = d.getMinutes();
+    h = h < 10 ? "0" + h : "" + h;
+    m = m < 10 ? "0" + m : "" + m;
+    clockEl.textContent = h + ":" + m;
+  }
+  tickClock();
+  setInterval(tickClock, 30000);
+
+  // ── 窗口管理 ──
+  var desktop = document.querySelector(".desktop");
+  var zTop = 30;
+  var openStack = [];
+  var winEls = Array.prototype.slice.call(document.querySelectorAll(".mac-window"));
+
+  function findWin(id) { return document.getElementById(id); }
+
+  function focusWindow(win) {
+    zTop++;
+    if (zTop > 8000) {
+      winEls.forEach(function (w) { w.style.zIndex = "10"; });
+      zTop = 30;
+    }
+    win.style.zIndex = zTop;
+    openStack = openStack.filter(function (w) { return w !== win; });
+    openStack.push(win);
+    winEls.forEach(function (w) { w.classList.toggle("is-front", w === win); });
+    rebuildWindowMenu();
+  }
+
+  function rebuildWindowMenu() {
+    var menu = document.getElementById("win-menu");
+    var html = "";
+    for (var i = 0; i < openStack.length; i++) {
+      var w = openStack[i];
+      var front = i === openStack.length - 1;
+      html += '<span class="mi' + (front ? " check" : "") + '" data-action="focus" data-target="' + w.id + '">' + w.getAttribute("data-title") + "</span>";
+    }
+    menu.innerHTML = html;
+  }
+
+  var defaultPos = {
+    "win-marsala": [150, 96],
+    "win-ordinary": [176, 118],
+    "win-comp": [202, 140],
+    "win-lululemon": [228, 162],
+    "win-patagonia": [254, 184],
+    "win-cases": [120, 244],
+    "win-posters": [140, 90],
+    "win-notes": [300, 210],
+    "win-post-1": [180, 100],
+    "win-post-2": [210, 120],
+    "win-post-3": [240, 140],
+    "win-post-4": [270, 160]
+  };
+
+  function openWindow(id) {
+    var win = findWin(id);
+    if (!win) return;
+    if (!win.dataset.pos && win.classList.contains("case-window")) {
+      var p = defaultPos[id] || [180, 120];
+      var x = Math.max(8, Math.min(p[0], window.innerWidth - 430));
+      var y = Math.max(70, Math.min(p[1], window.innerHeight - 140));
+      win.style.left = x + "px";
+      win.style.top = y + "px";
+      win.dataset.pos = "1";
+    }
+    win.classList.remove("hidden");
+    focusWindow(win);
+  }
+
+  function closeWindow(win) {
+    win.classList.add("hidden");
+    openStack = openStack.filter(function (w) { return w !== win; });
+    if (openStack.length) {
+      focusWindow(openStack[openStack.length - 1]);
+    } else {
+      winEls.forEach(function (w) { w.classList.remove("is-front"); });
+      rebuildWindowMenu();
+    }
+  }
+
+  function closeFront() {
+    if (openStack.length) closeWindow(openStack[openStack.length - 1]);
+  }
+
+  // 初始状态：主窗口与关于本机可见，主窗口在前
+  openWindow("win-main");
+  openWindow("win-about");
+  focusWindow(findWin("win-main"));
+
+  // ── 拖动（仿真实窗口）──
+  function makeDraggable(win) {
+    var titleBar = win.querySelector(".title-bar");
+    var dragging = null;
+    titleBar.addEventListener("pointerdown", function (e) {
+      if (e.target.closest(".win-btns")) return;
+      if (getComputedStyle(win).position !== "absolute") return; // 移动端静态布局不拖动
+      focusWindow(win);
+      var dRect = desktop.getBoundingClientRect();
+      var wRect = win.getBoundingClientRect();
+      win.style.left = (wRect.left - dRect.left) + "px";
+      win.style.top = (wRect.top - dRect.top) + "px";
+      win.style.right = "auto";
+      win.style.bottom = "auto";
+      win.style.transform = "none";
+      dragging = { dx: e.clientX - wRect.left, dy: e.clientY - wRect.top };
+      titleBar.setPointerCapture(e.pointerId);
+      document.body.classList.add("dragging");
+    });
+    titleBar.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dRect = desktop.getBoundingClientRect();
+      var x = e.clientX - dRect.left - dragging.dx;
+      var y = e.clientY - dRect.top - dragging.dy;
+      x = Math.max(0, Math.min(x, dRect.width - win.offsetWidth));
+      y = Math.max(22, Math.min(y, dRect.height - 24)); // 标题栏始终留在菜单栏下方，保证可继续拖动
+      win.style.left = x + "px";
+      win.style.top = y + "px";
+    });
+    function stopDrag(e) {
+      if (!dragging) return;
+      dragging = null;
+      document.body.classList.remove("dragging");
+      if (titleBar.hasPointerCapture && titleBar.hasPointerCapture(e.pointerId)) {
+        titleBar.releasePointerCapture(e.pointerId);
+      }
+    }
+    titleBar.addEventListener("pointerup", stopDrag);
+    titleBar.addEventListener("pointercancel", stopDrag);
+  }
+  winEls.forEach(makeDraggable);
+
+  // ── 关闭按钮 ──
+  document.querySelectorAll(".win-close").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeWindow(btn.closest(".mac-window"));
+    });
+  });
+
+  // ── 打开入口：作品行 / 桌面图标 ──
+  function bindOpen(el) {
+    el.addEventListener("click", function () { openWindow(el.dataset.target); });
+    if (el.classList.contains("work") || el.classList.contains("poster-card")) {
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openWindow(el.dataset.target);
+        }
+      });
+    }
+  }
+  document.querySelectorAll(".work, .icon, .poster-card").forEach(bindOpen);
+
+  // ── 菜单栏 ──
+  var menuItems = Array.prototype.slice.call(document.querySelectorAll(".menu-bar .menu-item"))
+    .filter(function (m) { return m.querySelector(".menu-drop"); });
+
+  function closeAllMenus() {
+    menuItems.forEach(function (m) { m.classList.remove("menu-open"); });
+  }
+  menuItems.forEach(function (item) {
+    item.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      var wasOpen = item.classList.contains("menu-open");
+      closeAllMenus();
+      if (!wasOpen) item.classList.add("menu-open");
+    });
+    item.addEventListener("mouseenter", function () {
+      if (document.querySelector(".menu-open")) {
+        closeAllMenus();
+        item.classList.add("menu-open");
+      }
+    });
+  });
+  document.addEventListener("mousedown", function (e) {
+    if (!e.target.closest(".menu-bar")) closeAllMenus();
+  });
+  document.addEventListener("click", function (e) {
+    var mi = e.target.closest(".mi");
+    if (!mi || mi.classList.contains("disabled")) return;
+    var action = mi.getAttribute("data-action");
+    if (action === "close-front") closeFront();
+    else if (action === "about") openWindow("win-about");
+    else if (action === "focus") openWindow(mi.getAttribute("data-target"));
+    closeAllMenus();
+  });
+
+  // ── 欢迎对话框 ──
+  document.getElementById("welcome-ok").addEventListener("click", function () {
+    document.getElementById("welcome").style.display = "none";
+  });
+</script>
+</body>
+</html>
