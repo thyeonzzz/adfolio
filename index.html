@@ -27,11 +27,21 @@
 
   body {
     background-color: #C5C5C5;
-    background-image:
-      linear-gradient(45deg, #BDBDBD 25%, transparent 25%, transparent 75%, #BDBDBD 75%),
-      linear-gradient(45deg, #BDBDBD 25%, transparent 25%, transparent 75%, #BDBDBD 75%);
-    background-size: 4px 4px;
-    background-position: 0 0, 2px 2px;
+    background-image: repeating-linear-gradient(
+      180deg,
+      #D6D6D6 0px, #D6D6D6 12.5px,
+      #D0D0D0 12.5px, #D0D0D0 25px,
+      #CCCCCC 25px, #CCCCCC 37.5px,
+      #C5C5C5 37.5px, #C5C5C5 50px,
+      #BFBFBF 50px, #BFBFBF 62.5px,
+      #BABABA 62.5px, #BABABA 75px,
+      #B4B4B4 75px, #B4B4B4 87.5px,
+      #AFAFAF 87.5px, #AFAFAF 100px,
+      #A9A9A9 100px, #A9A9A9 112.5px,
+      #A3A3A3 112.5px, #A3A3A3 125px,
+      #9E9E9E 125px, #9E9E9E 137.5px,
+      #989898 137.5px, #989898 150px
+    );
     font-family: "SimSun", "NSimSun", "宋体", "MS Sans Serif", Tahoma, Geneva, sans-serif;
     font-size: 12px;
     line-height: 1.6;
@@ -173,6 +183,39 @@
     gap: 2px;
   }
   .calc-keys span { background: #777; }
+
+  .trash-icon {
+    position: absolute;
+    right: 26px; bottom: 44px;
+    width: 78px;
+    text-align: center;
+    cursor: default;
+  }
+  .trash-icon:hover .icon-label { background: var(--ink); color: var(--paper); text-shadow: none; }
+  .trash { position: relative; width: 30px; height: 32px; margin: 2px auto 7px; }
+  .trash .lid {
+    position: absolute; top: 0; left: 2px; right: 2px; height: 7px;
+    border: 1px solid #333;
+    border-radius: 2px;
+    background: linear-gradient(#EFEFEF, #B0B0B0);
+    box-shadow: inset 1px 1px 0 #FFF;
+  }
+  .trash .can {
+    position: absolute; top: 6px; left: 4px; right: 4px; bottom: 0;
+    border: 1px solid #333;
+    border-radius: 2px 2px 5px 5px;
+    background: linear-gradient(#E6E6E6, #A6A6A6);
+    box-shadow: inset 1px 1px 0 #FFF;
+    padding: 3px 3px 2px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .trash .can span {
+    width: 2px;
+    background: #8C8C8C;
+    border-left: 1px solid #5A5A5A;
+    border-right: 1px solid #C8C8C8;
+  }
 
   .info {
     width: 30px; height: 30px; margin: 2px auto 0;
@@ -634,6 +677,14 @@
       <div class="icon-label">关于我</div>
     </div>
   </div></div>
+
+  <div class="trash-icon" id="trash-icon">
+    <div class="trash">
+      <div class="lid"></div>
+      <div class="can"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="icon-label">垃圾桶</div>
+  </div>
 
   <!-- ══ 主窗口：作品索引 ══ -->
   <div class="mac-window main-window" id="win-main" data-title="品牌策划作品集">
@@ -1704,6 +1755,15 @@
     </div>
   </div>
 
+  <!-- ══ 垃圾桶对话框 ══ -->
+  <div class="dialog" id="trash-dialog" style="display:none;">
+    <div class="title-bar">垃圾桶</div>
+    <div class="dialog-body">
+      <div class="dialog-text">垃圾桶是空的。</div>
+      <button class="btn bevel-out" id="trash-ok">好</button>
+    </div>
+  </div>
+
   <!-- ══ 欢迎对话框 ══ -->
   <div class="dialog" id="welcome">
     <div class="title-bar">欢迎</div>
@@ -1916,6 +1976,14 @@
   // ── 欢迎对话框 ──
   document.getElementById("welcome-ok").addEventListener("click", function () {
     document.getElementById("welcome").style.display = "none";
+  });
+
+  // ── 垃圾桶 ──
+  document.getElementById("trash-icon").addEventListener("click", function () {
+    document.getElementById("trash-dialog").style.display = "block";
+  });
+  document.getElementById("trash-ok").addEventListener("click", function () {
+    document.getElementById("trash-dialog").style.display = "none";
   });
 </script>
 </body>
