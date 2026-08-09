@@ -13,16 +13,6 @@
     overflow: hidden;
     position: relative;
   }
-  #app {
-    position: fixed; inset: 0;
-    width: 100%; height: 100%;
-    border: 0; display: block;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .45s ease;
-    z-index: 1;
-  }
-  #app.show { opacity: 1; pointer-events: auto; }
   #anim {
     position: fixed; inset: 0;
     display: flex; flex-direction: column;
@@ -30,9 +20,7 @@
     gap: 18px;
     background: #101014;
     z-index: 2;
-    transition: opacity .5s ease;
   }
-  #anim.done { opacity: 0; pointer-events: none; }
   .screen-frame {
     padding: 16px;
     background: #2a2a30;
@@ -87,13 +75,11 @@
 </style>
 </head>
 <body>
-  <iframe id="app" src="calculator/媒介预算计算器-正推模式.html" title="媒介预算计算器"></iframe>
-
   <div id="anim">
     <div class="screen-frame">
       <div class="screen" id="screen"><div class="flash" id="flash"></div></div>
     </div>
-    <div class="status">正在切换到 <b>Windows 98</b>…</div>
+    <div class="status" id="status">正在切换到 <b>Windows 98</b>…</div>
   </div>
 
   <button class="skip" id="skip">跳过动画</button>
@@ -134,17 +120,22 @@
   });
 
   var flash = document.getElementById('flash');
-  var anim = document.getElementById('anim');
-  var app = document.getElementById('app');
+  var statusEl = document.getElementById('status');
   var skip = document.getElementById('skip');
+  var target = 'calculator/媒介预算计算器-正推模式.html';
+
+  var jumped = false;
+  function jump() {
+    if (jumped) return;
+    jumped = true;
+    document.title = '媒介预算计算器 - 正推模式';
+    location.replace(target);
+  }
 
   function reveal() {
     flash.classList.add('on');
-    setTimeout(function () {
-      anim.classList.add('done');
-      app.classList.add('show');
-      skip.style.display = 'none';
-    }, 150);
+    statusEl.innerHTML = '正在启动计算器…';
+    setTimeout(jump, 280);
   }
 
   function play() {
