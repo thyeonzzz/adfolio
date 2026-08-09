@@ -855,8 +855,8 @@ function setupModeSwitch(current){
   $$('.mode-btn').forEach(b => {
     b.setAttribute('aria-pressed', b.dataset.page === current ? 'true' : 'false');
     b.addEventListener('click', () => {
-      if (b.dataset.page === 'f') goTo('媒介预算计算器-正推模式.html');
-      else goTo('媒介预算计算器-反推模式.html');
+      if (b.dataset.page === 'f') goTo('budget-calculator-forward.html');
+      else goTo('budget-calculator-reverse.html');
     });
   });
 }
@@ -1803,7 +1803,7 @@ function init(){
   setupModeSwitch('f');
   setupMenus({
     'goto-forward': () => {},
-    'goto-reverse': () => goTo('媒介预算计算器-反推模式.html'),
+    'goto-reverse': () => goTo('budget-calculator-reverse.html'),
     'reset': () => applyScenario('beauty'),
     'auto': autoAllocate,
     'scroll-results': () => smoothScroll('#results'),

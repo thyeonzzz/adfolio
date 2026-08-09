@@ -736,8 +736,8 @@ function setupModeSwitch(current){
   $$('.mode-btn').forEach(b => {
     b.setAttribute('aria-pressed', b.dataset.page === current ? 'true' : 'false');
     b.addEventListener('click', () => {
-      if (b.dataset.page === 'f') goTo('媒介预算计算器-正推模式.html');
-      else goTo('媒介预算计算器-反推模式.html');
+      if (b.dataset.page === 'f') goTo('budget-calculator-forward.html');
+      else goTo('budget-calculator-reverse.html');
     });
   });
 }
@@ -1274,17 +1274,17 @@ function init(){
   if (tbR) tbR.addEventListener('change', () => { tbR.value = tierBand; });
   applyTier(tier, computeReverse);
   $('#rev-apply').addEventListener('click', applyReverse);
-  $('#goto-forward').addEventListener('click', () => goTo('媒介预算计算器-正推模式.html'));
+  $('#goto-forward').addEventListener('click', () => goTo('budget-calculator-forward.html'));
   $('#export-md').addEventListener('click', exportMd);
   $('#export-xlsx').addEventListener('click', exportXlsx);
 
   setupWindow();
   setupModeSwitch('r');
   setupMenus({
-    'goto-forward': () => goTo('媒介预算计算器-正推模式.html'),
+    'goto-forward': () => goTo('budget-calculator-forward.html'),
     'goto-reverse': () => {},
     'scroll-results': () => smoothScroll('#results'),
-    'open-glossary': () => goTo('媒介预算计算器-正推模式.html#glossary')
+    'open-glossary': () => goTo('budget-calculator-forward.html#glossary')
   });
 
   computeReverse();
