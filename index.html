@@ -384,6 +384,9 @@
     overflow-x: auto;
   }
 
+  .folder.orange .tab, .folder.orange .body { border-color: #8A4B0B; }
+  .folder.orange .body { background: linear-gradient(#FFC46B, #E08A2E); }
+
   .folder.red .tab, .folder.red .body { border-color: #7A2020; }
   .folder.red .body { background: linear-gradient(#F2A9A0, #C75B4A); }
 
@@ -572,6 +575,13 @@
       </div>
       <div class="icon-label">帖文选摘</div>
     </div>
+    <div class="icon" data-target="win-selfproj">
+      <div class="icon-gfx folder orange">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">自发项目</div>
+    </div>
     <div class="icon" data-target="win-posters">
       <div class="icon-gfx folder green">
         <div class="tab"></div>
@@ -609,7 +619,7 @@
       </div>
       <div class="works-head">
         <span>作品索引</span>
-        <span>共 7 项</span>
+        <span>共 8 项</span>
       </div>
       <div class="work" data-target="win-marsala" tabindex="0">
         <span class="work-num bevel-out black">01</span>
@@ -673,6 +683,15 @@
           <div class="work-meta">反常识 · 行为经济学 · 消费者真相</div>
         </div>
         <span class="work-tag bevel-out">专栏</span>
+      </div>
+      <div class="work" data-target="win-selfproj" tabindex="0">
+        <span class="work-num bevel-out">08</span>
+        <div>
+          <div class="work-title">自发项目</div>
+          <div class="work-desc">自己给自己下 Brief，再自己交付——两种工作模式各跑一遍</div>
+          <div class="work-meta">麻辣王子「辣条正名」· 文和友品牌咨询</div>
+        </div>
+        <span class="work-tag bevel-out">自发</span>
       </div>
       <div class="works-foot">
         <span>单击打开项目 · 窗口可拖动</span>
@@ -1204,6 +1223,233 @@
       <div class="footnote">证据标注：案例事实来自品牌官网公开信、纽约时报广告与公开媒体报道（可查证）；拆解分析为方法论框架下的主观分析。</div>
     </div>
   </div>
+  <!-- ══ 自发项目 ══ -->
+  <div class="mac-window case-window hidden" id="win-selfproj" data-title="自发项目">
+    <div class="title-bar">自发项目
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <p class="hero-sub">没有客户，没有外部 deadline——自己给自己下 Brief，再自己交付。Marsala 的两种工作模式，各跑一遍完整闭环。</p>
+      <div class="rule"></div>
+      <div class="works-head">
+        <span>项目清单</span>
+        <span>2 项</span>
+      </div>
+      <div class="work" data-target="win-mala" tabindex="0">
+        <span class="work-num bevel-out black">01</span>
+        <div>
+          <div class="work-title">麻辣王子 · 2026 国庆「辣条正名」战役</div>
+          <div class="work-desc">营销策划模式：自设 Brief，交付提案 + 逻辑说明书</div>
+          <div class="work-meta">Big Idea「你的辣条，原名叫麻辣」· 三阶段节奏 · 证据账本</div>
+        </div>
+        <span class="work-tag bevel-out">营销</span>
+      </div>
+      <div class="work" data-target="win-wenheyou" tabindex="0">
+        <span class="work-num bevel-out">02</span>
+        <div>
+          <div class="work-title">文和友品牌咨询 · 自设 Brief</div>
+          <div class="work-desc">品牌咨询模式：重构 Brief + 商业战略 + 九道闸门定位</div>
+          <div class="work-meta">「长沙记忆的策展人」· 城市记忆零售 · 押 B 退 A 留 C</div>
+        </div>
+        <span class="work-tag bevel-out">咨询</span>
+      </div>
+      <div class="works-foot">
+        <span>单击打开项目</span>
+        <span>均为独立完成</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 自发项目 · 麻辣王子 ══ -->
+  <div class="mac-window case-window hidden" id="win-mala" data-title="麻辣王子 · 2026 国庆「辣条正名」战役">
+    <div class="title-bar">麻辣王子 · 2026 国庆「辣条正名」战役
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">01</span>
+          <span class="chip black">自发 · 营销策划</span>
+        </div>
+        <h1>麻辣王子 · 2026 国庆<br>「辣条正名」战役</h1>
+        <p class="cc-sub">自设 Brief 实践（营销策划模式）：不卖促销，卖「正名」——你的辣条，原名叫麻辣。</p>
+        <div class="cc-meta">
+          <div><b>靶品牌：</b>麻辣王子（品牌部视角）· 节点：2026 国庆 · 约束：不联名</div>
+          <div><b>交付物：</b>提案（对外版）+ 逻辑说明书（内部版）</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">自设 Brief（出题）</div>
+        <div class="sec-body">
+          <p>国庆 7 天是 2026 年最后一个「年轻人的长假」，也是辣条生日月——辣条 1998 年 10 月在湖南平江出生，本名「麻辣」。战役只做一件事：让全国人在 10 月记住——辣条是中国发明的，本名叫麻辣，原名持有者是麻辣王子。</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">关键判断</div>
+        <div class="insight">认知度 97.88% 但没人想得起——麻辣王子缺的不是知名度，是国庆场景里的「那一瞬」。<br>卫龙正在把火力撤出辣条（辣条收入占比降到 35.3%）——心智里「辣条一哥」的位置还占着，占位的人却走了。谁在国庆拿走「正宗辣条」的定义权，谁就拿到下一个十年的解释权。</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Big Idea</div>
+        <div class="insight">你的辣条，原名叫麻辣——身份级正名，不是口味级宣传。<span class="small">钩子永远用「辣条，原来不叫辣条？」开头；「原名叫麻辣」只做落点。消费者不为「麻辣」停留，只为「辣条居然是改过名的」停留。</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">四个动作</div>
+        <div class="rows">
+          <div class="row">
+            <h4>产品 · 正名载体</h4>
+            <p>10 月限定「出生证明」包装：1998 年 10 月 · 湖南平江 · 原名：麻辣 · 发明人：邱平江 / 李猛能 / 钟庆元。10 月 31 日下架，制造「这个月才有」的理由。</p>
+          </div>
+          <div class="row">
+            <h4>内容 · 身世叙事</h4>
+            <p>发明人出镜讲当年（1998 年洪水、用面粉替代豆粉、四川火锅的麻辣灵感）——内核是冷知识反差，不是纪录片、不说教、不用「爱国」大词。</p>
+          </div>
+          <div class="row">
+            <h4>社交 · 全民转述</h4>
+            <p>正名 UGC：「辣条，原来不叫辣条？」；10 月生日的人自动获得「和辣条同月生」的梗；晒出生证明即参与正名。</p>
+          </div>
+          <div class="row">
+            <h4>线下 · 收口</h4>
+            <p>长沙体验店 / 辣条博物馆「辣条生日会」联动，店内「麻辣王擂台」承接正名话题。</p>
+          </div>
+        </div>
+        <p class="sec-body" style="margin-top:10px;">三条红线：不点名竞品（留白，让观众自己想起是谁）；不碰调休怒火；不做「天热吃辣」——正名卖的是身份，不是辣度。</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">三阶段节奏</div>
+        <div class="rows">
+          <div class="row">
+            <h4>悬念预热</h4>
+            <p>9 月中下旬：抛出「辣条，原来不叫辣条？」，用这个惊讶钩做数据测试，验证叙事接不接得住。</p>
+          </div>
+          <div class="row">
+            <h4>国庆引爆</h4>
+            <p>9/28-10/7：正名宣言发布、限定包装全渠道上架、发明人出镜系列上线、UGC 晒证集中爆发。</p>
+          </div>
+          <div class="row">
+            <h4>生日月长尾</h4>
+            <p>10/8-10/31：搜索占位与「辣条原名」科普持续沉淀；内容进入博物馆 / 体验店，变成长期资产。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">逻辑说明书（内部版）</div>
+        <div class="rows">
+          <div class="row">
+            <h4>最弱一环</h4>
+            <p>「辣条原来不叫辣条」这个意外是否成立。钩子必须是「X 不是 X」的惊讶（熟悉的词被推翻），不是「告诉你一个新词」。推翻它需要预热期测试钩子的互动 / 收藏率数据。</p>
+          </div>
+          <div class="row">
+            <h4>关键决策点</h4>
+            <p>情绪载体选「正名」（不接负情绪、有产品必然）；机制选「生日月正名」（只有 10 月能做，时间独占）；创意性质是「判断」而非「点子」——押「麻辣是辣条的本来面目」，可证伪。</p>
+          </div>
+          <div class="row">
+            <h4>换假设测试</h4>
+            <p>若惊讶成立但消费者不关心「谁持有」→ 品牌落点前移到包装与口播；若发明人背书不被当回事 → 改用「品牌名 = 品类原名」的自我论证。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footnote">边界声明：媒介投放、达人名单、精确预算与 ROI 均为占位或方向；平台内部数据（搜索量、动销）需品牌方提供后校准；转引数字（如麻辣细分增速 33%）未经原始报告核实。执行层面（包装、内容制作、投放排期）不在方案范围内——Marsala 只做判断这半个。</div>
+    </div>
+  </div>
+
+  <!-- ══ 自发项目 · 文和友 ══ -->
+  <div class="mac-window case-window hidden" id="win-wenheyou" data-title="文和友品牌咨询 · 自设 Brief">
+    <div class="title-bar">文和友品牌咨询 · 自设 Brief
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">02</span>
+          <span class="chip black">自发 · 品牌咨询</span>
+        </div>
+        <h1>文和友品牌咨询<br>自设 Brief</h1>
+        <p class="cc-sub">自设 Brief 实践（品牌咨询模式）：把一家被媒体定性「失败」的公司，拆成一个可验证的生意命题。</p>
+        <div class="cc-meta">
+          <div><b>靶品牌：</b>文和友 · 数据时点：2026-08</div>
+          <div><b>交付物：</b>重构 Brief + 商业战略 + 市场研究 + 消费者洞察 + 定位命题（九道闸门）+ 逻辑说明书</div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">自设 Brief（出题）</div>
+        <div class="sec-body">
+          <p>业务目标：决定文和友未来 3-5 年的生意形态——先定「靠什么活」，再谈品牌。品牌主问题：文化公司、餐饮公司、商业地产，三个身份收敛成一个，并承担它的代价。约束：只剩长沙一家店、B 轮资本压力、媒体已定性「失败」。</p>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">核心判断</div>
+        <div class="insight">文和友不是餐饮公司，也不是文化公司——它是「长沙记忆的策展人」，生意本质是「城市记忆零售」：空间是展厅，食品是纪念品。<span class="small">广深失败不是「长沙文化搬不出去」，是它想卖的是空间——而空间搬不出去；能搬出去的是记忆的载体：食品。</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">商业战略</div>
+        <div class="rows">
+          <div class="row">
+            <h4>三个生意选项</h4>
+            <p>A 单店深耕（基本盘）/ B 自有品牌食品零售（未验证，但已有产品事实与电商项目）/ C 在地文化能力输出（远期期权）。结论：押 B，A 是基本盘，C 是期权。</p>
+          </div>
+          <div class="row">
+            <h4>隐藏前提检验</h4>
+            <p>「我们是餐饮/文化公司」「扩张 = 复制长沙店」「文和友 IP 可以迪士尼化」——三个前提全部失效。迪士尼有产权化 IP 体系；文和友的 IP 是一座搬不走的楼，不可产权化。</p>
+          </div>
+          <div class="row">
+            <h4>护城河真空</h4>
+            <p>Seven Powers 全空：有知名度但无溢价权、无独占资源、无网络效应、无转换成本。唯一可能的护城河只有一个字：真——谁先让消费者相信「这是真的市井，不是布景」，谁拿走解释权。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">消费者洞察</div>
+        <div class="insight">猎奇赶走日常，日常验证猎奇。<br>游客买文和友 = 活力 + 社交愉悦；本地人吃饭 = 归属 + 安全——一个空间想服务两个互斥动机，文和友死于两头都想要。<span class="small">「假」是社媒口碑里最高频的负面词。本地人不是目标人群，是「真实性认证官」：本地人愿意来的地方，游客才信是真的。</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">定位命题（九道闸门）</div>
+        <div class="insight">文和友 = 长沙市井记忆的策展人——空间是展厅，食品是纪念品。<span class="small">品类创新定位：不跟「景点餐饮」竞争，重新定义品类为「城市记忆零售」。增长逻辑：不复制空间（已证伪），复制纪念品（可验证）。</span></div>
+        <div class="rows" style="margin-top:12px;">
+          <div class="row">
+            <h4>候选收敛</h4>
+            <p>五个候选：打卡地标（现状不是出路）/ 正宗长沙美食（本地不认、复购为零）/ 市井文化内容运营商（能力未验证，降为远期）/ 长沙味道食品品牌（活）/ 餐饮界迪士尼（无 IP 产权体系，死）。</p>
+          </div>
+          <div class="row">
+            <h4>完整链</h4>
+            <p>定位「记忆策展人」→ 传播主张「这里不是景」→ 创意（真老店入驻、手艺人在场、本地人推荐）→ 媒介（小红书本地认证、游客攻略占位）→ 行为预测（本地回流率↑、预包装复购↑、「假」类负面↓）。</p>
+          </div>
+          <div class="row">
+            <h4>致死数据</h4>
+            <p>引入真老店 + 本地认证后 90 天内，打卡量显著下降或「假」类负面不降——定位撤回。押「真」的理由：出片那条路，广深已经替文和友试过了，结果是关店。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">逻辑说明书</div>
+        <div class="rows">
+          <div class="row">
+            <h4>最弱一环</h4>
+            <p>游客到底在乎「真」还是「出片」。推翻它需要：真老店改造试点后 90 天的打卡量与负面词占比变化。若游客不在乎真——定位降级为「出片第一」，生意退回 A 路径。</p>
+          </div>
+          <div class="row">
+            <h4>换假设</h4>
+            <p>若「长沙味道纪念品」是伪需求（游客只在店里买、回家不买）→ 退回单店深耕 + 内容更新，定位不变但承诺缩水。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footnote">边界声明：内部经营数据（租金结构、B 轮条款、自有品牌销量）未获取；社媒口碑为公开内容观察，属方向性参考；「游客在乎真还是出片」需试点验证后方可收口。</div>
+    </div>
+  </div>
+
   <!-- ══ 帖文选摘 ══ -->
   <div class="mac-window case-window hidden" id="win-notes" data-title="帖文选摘">
     <div class="title-bar">帖文选摘
@@ -1322,7 +1568,7 @@
     <div class="window-body">
       <div class="works-head">
         <span>全部项目</span>
-        <span>7 项</span>
+        <span>8 项</span>
       </div>
       <div class="work work-sm" data-target="win-marsala" tabindex="0">
         <span class="work-num bevel-out black">01</span>
@@ -1359,9 +1605,14 @@
         <div><div class="work-title">帖文选摘</div></div>
         <span class="work-tag bevel-out">专栏</span>
       </div>
+      <div class="work work-sm" data-target="win-selfproj" tabindex="0">
+        <span class="work-num bevel-out">08</span>
+        <div><div class="work-title">自发项目</div></div>
+        <span class="work-tag bevel-out">自发</span>
+      </div>
       <div class="works-foot">
         <span>单击打开项目</span>
-        <span>共 7 项</span>
+        <span>共 8 项</span>
       </div>
     </div>
   </div>
@@ -1397,7 +1648,7 @@
     <div class="title-bar">欢迎</div>
     <div class="dialog-body">
       <div class="dialog-text">欢迎查看thyeon的品牌策划作品集。</div>
-      <div class="dialog-sub">本机已加载 7 个项目，单击即可打开。</div>
+      <div class="dialog-sub">本机已加载 8 个项目，单击即可打开。</div>
       <button class="btn bevel-out" id="welcome-ok">好</button>
     </div>
   </div>
@@ -1458,6 +1709,9 @@
     "win-cases": [120, 244],
     "win-posters": [140, 90],
     "win-notes": [300, 210],
+    "win-selfproj": [120, 96],
+    "win-mala": [180, 140],
+    "win-wenheyou": [240, 180],
     "win-post-1": [180, 100],
     "win-post-2": [210, 120],
     "win-post-3": [240, 140],
