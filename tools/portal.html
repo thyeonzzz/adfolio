@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系统切换中</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #000;
+    font-family: "SimSun", "Microsoft YaHei", sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  #app {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s ease;
+    z-index: 1;
+  }
+  #app.show { opacity: 1; pointer-events: auto; }
+  #anim {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 18px;
+    background: #101014;
+    z-index: 2;
+    transition: opacity .5s ease;
+  }
+  #anim.done { opacity: 0; pointer-events: none; }
+  .screen-frame {
+    padding: 16px;
+    background: #2a2a30;
+    border-radius: 14px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.7);
+    transform-origin: center center;
+  }
+  .screen {
+    position: relative;
+    width: 900px; height: 560px;
+    perspective: 1400px;
+    overflow: hidden;
+    background: #000;
+    border-radius: 4px;
+  }
+  .tile { position: absolute; }
+  .tile-inner {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    transition: transform .6s cubic-bezier(.34, 1.25, .5, 1);
+    will-change: transform;
+  }
+  .tile.flipped .tile-inner { transform: rotateX(180deg); }
+  .face {
+    position: absolute; inset: 0;
+    background-size: 900px 560px;
+    background-repeat: no-repeat;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .face.front { background-image: url('mac-desktop.png'); }
+  .face.back { background-image: url('win98-desktop.png'); transform: rotateX(180deg); }
+  .flash {
+    position: absolute; inset: 0; z-index: 5;
+    background: #fff; opacity: 0; pointer-events: none;
+    transition: opacity .45s ease;
+  }
+  .flash.on { opacity: .6; transition: none; }
+  .status { font-size: 14px; color: #9a9aa2; letter-spacing: .1em; }
+  .status b { color: #fff; }
+  .skip {
+    position: fixed; top: 18px; right: 18px; z-index: 6;
+    font-family: "SimSun"; font-size: 13px;
+    padding: 7px 16px; border-radius: 6px;
+    border: 1px solid #444; background: #202026; color: #ccc;
+    cursor: pointer;
+  }
+  .skip:hover { background: #2c2c34; color: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    .tile-inner { transition-duration: .01s !important; }
+  }
+</style>
+</head>
+<body>
+  <iframe id="app" src="calculator/媒介预算计算器-正推模式.html" title="媒介预算计算器"></iframe>
+
+  <div id="anim">
+    <div class="screen-frame">
+      <div class="screen" id="screen"><div class="flash" id="flash"></div></div>
+    </div>
+    <div class="status">正在切换到 <b>Windows 98</b>…</div>
+  </div>
+
+  <button class="skip" id="skip">跳过动画</button>
+
+<script>
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cols = 12, rows = 8;
+  var tileW = 900 / cols, tileH = 560 / rows;
+  var screen = document.getElementById('screen');
+  var tiles = [];
+  for (var r = 0; r < rows; r++) {
+    for (var c = 0; c < cols; c++) {
+      var tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.style.left = (c * tileW) + 'px';
+      tile.style.top = (r * tileH) + 'px';
+      tile.style.width = tileW + 'px';
+      tile.style.height = tileH + 'px';
+      var inner = document.createElement('div');
+      inner.className = 'tile-inner';
+      var front = document.createElement('div');
+      front.className = 'face front';
+      front.style.backgroundPosition = (-c * tileW) + 'px ' + (-r * tileH) + 'px';
+      var back = document.createElement('div');
+      back.className = 'face back';
+      back.style.backgroundPosition = (-c * tileW) + 'px ' + (-r * tileH) + 'px';
+      inner.appendChild(front); inner.appendChild(back);
+      tile.appendChild(inner);
+      screen.appendChild(tile);
+      tiles.push({ inner: inner, tile: tile, r: r, c: c });
+    }
+  }
+
+  var cx = (cols - 1) / 2, cy = (rows - 1) / 2, maxD = 0;
+  tiles.forEach(function (t) {
+    var d = Math.hypot(t.c - cx, t.r - cy);
+    if (d > maxD) maxD = d;
+  });
+
+  var flash = document.getElementById('flash');
+  var anim = document.getElementById('anim');
+  var app = document.getElementById('app');
+  var skip = document.getElementById('skip');
+
+  function reveal() {
+    flash.classList.add('on');
+    setTimeout(function () {
+      anim.classList.add('done');
+      app.classList.add('show');
+      skip.style.display = 'none';
+    }, 150);
+  }
+
+  function play() {
+    tiles.forEach(function (t) {
+      var d = Math.hypot(t.c - cx, t.r - cy);
+      t.inner.style.transitionDelay = (d * 22) + 'ms';
+      t.tile.classList.add('flipped');
+    });
+    setTimeout(reveal, maxD * 22 + 780);
+  }
+
+  skip.addEventListener('click', function () {
+    tiles.forEach(function (t) { t.tile.classList.add('flipped'); });
+    reveal();
+  });
+
+  function fit() {
+    var s = Math.min(1, (window.innerWidth - 90) / 900, (window.innerHeight - 200) / 560);
+    document.querySelector('.screen-frame').style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  if (reduced) {
+    skip.click();
+  } else {
+    setTimeout(play, 700);
+  }
+</script>
+</body>
+</html>
