@@ -185,18 +185,13 @@
   }
   .calc-keys span { background: #777; }
 
-  .desktop-mark {
-    position: fixed;
-    top: 48px;
-    left: 34px;
-    width: 150px;
-    opacity: 0.55;
-    z-index: 1;
-    pointer-events: none;
-    image-rendering: pixelated;
-    -webkit-user-select: none;
-    user-select: none;
+  .marsala-cover {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
   }
+  .marsala-logo { width: 132px; image-rendering: pixelated; }
 
   .trash-icon {
     position: absolute;
@@ -580,6 +575,8 @@
       max-height: none;
     }
     .window-body { max-height: 62vh; }
+    .marsala-cover { grid-template-columns: 1fr; }
+    .marsala-logo { width: 110px; margin: 0 auto; }
     .menu-drop { position: fixed; }
   }
 </style>
@@ -635,9 +632,7 @@
 
 <div class="desktop">
 
-    <img class="desktop-mark" src="assets/marsala-mark.png" alt="Marsala">
-
-  <div class="icons">
+    <div class="icons">
     <div class="icon" data-target="win-main">
       <div class="icon-gfx disk">
         <div class="case"></div>
@@ -821,17 +816,20 @@
       <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
     </div>
     <div class="window-body">
-      <div class="case-cover">
-        <div class="cc-top">
-          <span class="mono">01</span>
-          <span class="chip black">系统</span>
+      <div class="case-cover marsala-cover">
+        <div>
+          <div class="cc-top">
+            <span class="mono">01</span>
+            <span class="chip black">系统</span>
+          </div>
+          <h1>Marsala</h1>
+          <p class="cc-sub">一套应用于品牌咨询和营销策划领域的可执行知识</p>
+          <div class="cc-meta">
+            <div><b>架构：</b>中枢（客户总监）+ 六大模块 + 四层审查</div>
+            <div><b>角色：</b>本作品集的方法之源，四个案例均由它驱动</div>
+          </div>
         </div>
-        <h1>Marsala</h1>
-        <p class="cc-sub">一套应用于品牌咨询和营销策划领域的可执行知识</p>
-        <div class="cc-meta">
-          <div><b>架构：</b>中枢（客户总监）+ 六大模块 + 四层审查</div>
-          <div><b>角色：</b>本作品集的方法之源，四个案例均由它驱动</div>
-        </div>
+        <img class="marsala-logo" src="assets/marsala-mark.png" alt="Marsala 标志">
       </div>
 
       <div class="sec">
