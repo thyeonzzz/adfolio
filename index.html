@@ -403,6 +403,16 @@
   .note-stats { font-size: 11px; color: #3D3D3D; margin-top: 8px; }
   .note-row a { text-decoration: underline; }
   .note-row a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+  .launch-btn {
+    display: inline-block;
+    padding: 6px 16px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .launch-btn:hover { background: var(--ink); color: var(--paper); }
 
   .folder.green .tab, .folder.green .body { border-color: #2E5C1E; }
   .folder.green .body { background: linear-gradient(#A8E07F, #5DA039); }
@@ -619,7 +629,7 @@
       </div>
       <div class="works-head">
         <span>作品索引</span>
-        <span>共 8 项</span>
+        <span>共 9 项</span>
       </div>
       <div class="work" data-target="win-marsala" tabindex="0">
         <span class="work-num bevel-out black">01</span>
@@ -692,6 +702,15 @@
           <div class="work-meta">contour gaze · silence wave · 飞鸟集 v1.0 · 真空非空</div>
         </div>
         <span class="work-tag bevel-out">视觉</span>
+      </div>
+      <div class="work" data-target="win-calc" tabindex="0">
+        <span class="work-num bevel-out">09</span>
+        <div>
+          <div class="work-title">媒介预算计算器</div>
+          <div class="work-desc">AI 编程项目：按渠道效率自动拆解媒介预算，正推 / 反推双模式</div>
+          <div class="work-meta">渠道效率 · CPA · ROI · 自动分配</div>
+        </div>
+        <span class="work-tag bevel-out">工具</span>
       </div>
       <div class="works-foot">
         <span>单击打开项目 · 窗口可拖动</span>
@@ -1568,7 +1587,7 @@
     <div class="window-body">
       <div class="works-head">
         <span>全部项目</span>
-        <span>8 项</span>
+        <span>9 项</span>
       </div>
       <div class="work work-sm" data-target="win-marsala" tabindex="0">
         <span class="work-num bevel-out black">01</span>
@@ -1610,9 +1629,54 @@
         <div><div class="work-title">视觉实验</div></div>
         <span class="work-tag bevel-out">视觉</span>
       </div>
+      <div class="work work-sm" data-target="win-calc" tabindex="0">
+        <span class="work-num bevel-out">09</span>
+        <div><div class="work-title">媒介预算计算器</div></div>
+        <span class="work-tag bevel-out">工具</span>
+      </div>
       <div class="works-foot">
         <span>单击打开项目</span>
-        <span>共 8 项</span>
+        <span>共 9 项</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 媒介预算计算器 ══ -->
+  <div class="mac-window case-window hidden" id="win-calc" data-title="媒介预算计算器">
+    <div class="title-bar">媒介预算计算器
+      <span class="win-btns"><span class="win-close"></span><span class="win-zoom"></span></span>
+    </div>
+    <div class="window-body">
+      <div class="case-cover">
+        <div class="cc-top">
+          <span class="mono">09</span>
+          <span class="chip black">AI 工具</span>
+        </div>
+        <h1>媒介预算计算器</h1>
+        <p class="cc-sub">用 AI 编写的媒介策划工具：按渠道效率自动拆解预算，支持正推与反推两种模式。</p>
+        <div class="cc-meta">
+          <div><b>类型：</b>AI 编程项目 · 独立 HTML 应用</div>
+          <div><b>用法：</b>点击下方按钮，在新标签页中打开工具</div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sec-title">两种模式</div>
+        <div class="rows">
+          <div class="row">
+            <h4>正推模式<span class="lbl">预算 → 产出</span></h4>
+            <p>输入总预算与各渠道效率参数（CPM / CTR / CVR / CPA、锁定与保底、占比上限），自动分配预算——CPA 越低的渠道拿越多，单渠道默认不超过 45%。输出预计转化、综合 CPA 与 ROI，可导出方案。</p>
+            <p style="margin-top:10px;"><a class="launch-btn bevel-out" href="tools/calculator/媒介预算计算器-正推模式.html" target="_blank" rel="noopener">打开正推模式 →</a></p>
+          </div>
+          <div class="row">
+            <h4>反推模式<span class="lbl">目标 → 预算</span></h4>
+            <p>先定目标转化量（可附带目标 CPA / ROI），按渠道效率反推所需预算：目标转化 ÷ 每元转化效率 = 所需预算。输出所需预算、与当前预算的差额、预计转化与毛利 ROI，可把倒推预算应用回渠道。</p>
+            <p style="margin-top:10px;"><a class="launch-btn bevel-out" href="tools/calculator/媒介预算计算器-反推模式.html" target="_blank" rel="noopener">打开反推模式 →</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="works-foot">
+        <span>独立工具 · 新标签页打开</span>
+        <span>AI 编程实践</span>
       </div>
     </div>
   </div>
@@ -1648,7 +1712,7 @@
     <div class="title-bar">欢迎</div>
     <div class="dialog-body">
       <div class="dialog-text">欢迎查看thyeon的品牌策划作品集。</div>
-      <div class="dialog-sub">本机已加载 8 个项目，单击即可打开。</div>
+      <div class="dialog-sub">本机已加载 9 个项目，单击即可打开。</div>
       <button class="btn bevel-out" id="welcome-ok">好</button>
     </div>
   </div>
@@ -1712,6 +1776,7 @@
     "win-selfproj": [120, 96],
     "win-mala": [180, 140],
     "win-wenheyou": [240, 180],
+    "win-calc": [160, 120],
     "win-post-1": [180, 100],
     "win-post-2": [210, 120],
     "win-post-3": [240, 140],
