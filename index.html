@@ -151,6 +151,29 @@
   .disk .vent { position: absolute; left: 12px; right: 4px; top: 6px; height: 7px; }
   .disk .vent span { display: block; height: 1px; background: #777; margin-bottom: 2px; }
 
+  .calc {
+    width: 34px; height: 32px;
+    margin: 0 auto 0;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background: linear-gradient(#ECECEC, #A8A8A8);
+    box-shadow: inset 1px 1px 0 #FFF;
+    position: relative;
+  }
+  .calc-screen {
+    position: absolute; left: 5px; top: 4px; right: 5px; height: 8px;
+    background: #111;
+    border: 1px solid #333;
+  }
+  .calc-keys {
+    position: absolute; left: 5px; right: 5px; bottom: 4px;
+    height: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .calc-keys span { background: #777; }
+
   .info {
     width: 30px; height: 30px; margin: 2px auto 0;
     border: 1px solid #1C3D66;
@@ -555,7 +578,7 @@
 
 <div class="desktop">
 
-  <div class="icons">
+    <div class="icons">
     <div class="icon" data-target="win-main">
       <div class="icon-gfx disk">
         <div class="case"></div>
@@ -571,6 +594,13 @@
       </div>
       <div class="icon-label">Marsala</div>
     </div>
+    <div class="icon" data-target="win-selfproj">
+      <div class="icon-gfx folder orange">
+        <div class="tab"></div>
+        <div class="body"></div>
+      </div>
+      <div class="icon-label">自发项目</div>
+    </div>
     <div class="icon" data-target="win-cases">
       <div class="icon-gfx folder blue">
         <div class="tab"></div>
@@ -585,13 +615,6 @@
       </div>
       <div class="icon-label">帖文选摘</div>
     </div>
-    <div class="icon" data-target="win-selfproj">
-      <div class="icon-gfx folder orange">
-        <div class="tab"></div>
-        <div class="body"></div>
-      </div>
-      <div class="icon-label">自发项目</div>
-    </div>
     <div class="icon" data-target="win-posters">
       <div class="icon-gfx folder green">
         <div class="tab"></div>
@@ -599,11 +622,18 @@
       </div>
       <div class="icon-label">视觉实验</div>
     </div>
+    <div class="icon" data-target="win-calc">
+      <div class="icon-gfx calc">
+        <div class="calc-screen"></div>
+        <div class="calc-keys"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="icon-label">媒介预算计算器</div>
+    </div>
     <div class="icon" data-target="win-about">
       <div class="icon-gfx info">i</div>
       <div class="icon-label">关于我</div>
     </div>
-  </div>
+  </div></div>
 
   <!-- ══ 主窗口：作品索引 ══ -->
   <div class="mac-window main-window" id="win-main" data-title="品牌策划作品集">
