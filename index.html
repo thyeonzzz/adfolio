@@ -185,6 +185,19 @@
   }
   .calc-keys span { background: #777; }
 
+  .desktop-mark {
+    position: fixed;
+    top: 48px;
+    left: 34px;
+    width: 150px;
+    opacity: 0.55;
+    z-index: 1;
+    pointer-events: none;
+    image-rendering: pixelated;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   .trash-icon {
     position: absolute;
     right: 26px; bottom: 44px;
@@ -622,7 +635,9 @@
 
 <div class="desktop">
 
-    <div class="icons">
+    <img class="desktop-mark" src="assets/marsala-mark.png" alt="Marsala">
+
+  <div class="icons">
     <div class="icon" data-target="win-main">
       <div class="icon-gfx disk">
         <div class="case"></div>
